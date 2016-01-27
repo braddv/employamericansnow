@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+	 <script type="text/javascript" src="reveal.js-3.2.0/d3.min.js"></script>
+     <script type="text/javascript" src="reveal.js-3.2.0/topojson.js"></script>
+     <script type="text/javascript" src="reveal.js-3.2.0/datamaps.usa.min.js"></script>
+     <script type="text/javascript" src="reveal.js-3.2.0/raphael-min.js"></script>
+	 <script type="text/javascript" src="reveal.js-3.2.0/us-map-svg.js"></script>
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="reveal.js-3.2.0/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js-3.2.0/css/theme/simple.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js-3.2.0/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					
+					<h2>Employ Young Americans Now</h2>
+					<br>
+					<h4>to provide for youth jobs, and for other purposes</h4>
+					<br>
+					<br>
+					<p>
+						<small><a href="http://twitter.com/bradvoracek">Brad Voracek</a> </small>
+					</p>
+				</section>
+
+				<section>
+					<p>
+						Representative John Conyer of Michigan and Senator Bernie Sanders of Vermont have introduced legislation which attempts to provide $5.5 billion dollars to create youth jobs. 
+					</p>
+					<p><small>The bill died in the 113th Congress, but has been reintroduced.</small></p><p><Small> <small>It is stuck in commitee with no chance of passing.</small></Small></p>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>The Seed of a Job Guarantee</h2>
+						<br>
+						<br>
+						<p>If implemented, it becomes a channel for direct government job creation. The bill establishes a fund, initially endowed with $5.5 billion dollars, to directly employ low income youth.</p>
+
+					</section>
+				</section>
+
+				<section>
+					<section>
+					<h2>Distribution</h2>
+					<p>Money is provided through two different channels:</p>
+						<ul>
+							<li>$1.5 billion in competitive grants for work based training and education</li>
+							<li>$4 billion for summer and year round employment opportunities</li>
+							<ul><small>
+								<li>$1 billion divided equally between States</li>
+								<li>$1 billion distributed on the basis of the relative number of 16-25 year old individuals in the civilian labor force, compared to the total number in all States.</li>
+								<li>$1 billion distributed on the basis of the relative number of unemployed individuals in each State, compared to the total number in all States</li>
+								<li>$1 billion on the basis of the relative number of disadvantaged young adults and youth in each State, compared to the total number in all States.</li>
+						</ul></small>
+						<br>
+					</section>
+						<section>
+							<h3>16-25 y/o labor force percentage</h3>
+							<div id="container" style="position: relative; width: 500px; height: 800px;"></div>
+							<script>
+								  window.onload = function () {
+								    var R1 = Raphael("container", 1000, 900),
+								      attr = {
+								      "fill": "#d3d3d3",
+								      "stroke": "#fff",
+								      "stroke-opacity": "1",
+								      "stroke-linejoin": "round",
+								      "stroke-miterlimit": "4",
+								      "stroke-width": "0.75",
+								      "stroke-dasharray": "none",
+								      "title":"13%"
+								    },
+								    usRaphael1 = {};
+								    
+								    //Draw Map and store Raphael paths
+								    for (var state in usMap) {
+								      usRaphael1[state] = R1.path(usMap[state]).attr(attr);
+								    }
+								    
+								    //Do Work on Map
+								    for (var state in usRaphael1) {
+								      usRaphael1[state].color = Raphael.getColor();
+								      
+								      (function (st, state) {
+								        st[0].style.cursor = "pointer";
+								        st[0].onmouseover = function () {
+								          st.animate({fill: st.color}, 500);
+								          st.toFront();
+								          R1.safari();
+								        };
+								        st[0].onmouseout = function () {
+								          st.animate({fill: "#d3d3d3"}, 500);
+								          st.toFront();
+								          R1.safari();
+								        };
+								                   
+								      })(usRaphael1[state], state);
+								    }
+								            
+								  };
+							</script>
+						</section>
+						<section><h3>unemployment percentage</h3>
+							<div id="container2" style="position: relative; width: 500px; height: 800px;"></div>
+						</section>
+						<section><h3>disadvantaged young adults percentage</h3>
+							<div id="container3" style="position: relative; width: 500px; height: 800px;"></div>
+
+
+				</section>
+				</section>
+				
+				<section>
+				<section>
+					<ul>
+						<h2>California:</h2>
+						<h3>400 million dollars (.02% GDP)</h3>
+						<li>Governor sets aside 5% for administration</li>
+						<li>Remaining funds get distributed to PUMAs within the State similar to how funds were allocated to States nationally</li>
+						<li>38,000 jobs</li>
+					</ul>
+				</section>
+				<section>
+					<p>13% of the youth</p>
+					<p>10% unemployment</p>
+					<p>12% disadvantaged youth </p>
+					<p>.05*1 + .13*1 + .1*1 + .12*1 = 400 million</p>
+					<p>Assuming 720 hrs a year at $15/hr this creates 38000 initial jobs paying $10500 a year</p>
+					<p>14 million youth in poverty, 12% in California = 1.7 million</p>
+				</section>
+
+				</section>
+				<section>
+					<h3> What jobs will we fund? </h3>
+					<br>
+					<ui> 
+						<li>In emerging or in demand occupations in the local area</li>
+						<li>in the public or nonprofit sector to meet community needs</li>
+						<li>industry recognized certifications</li>
+
+						<p><small>In July 2015, 27 percent of employed youth worked in the leisure and hospitality industry (which includes food services), 20 percent worked in the retail trade industry, and another 11 percent worked in education and health services.</small></p>
+						<small>ideas: 						<li>companions to the elderly, public school classroom assistants, safety monitors, environmental safety monitors, daycare assistants, community and cultural historians, artists or musicians, park services
+						</li>
+						<li>household maintenance, care provisioning for families, infrastructure gaps in energy, health, and education</li>
+						</small>
+					</ui>
+
+				</section>
+				<section>
+				<section>
+					<h3> The Grants </h3>
+					<p><small>partnerships with chief elected officials and local boards</small></p>
+					<ui>
+						<li>on the job training, apprenticeships</li>
+						<li>specific sector based training programs</li>
+						<li>partnerships with large work-experience components</li>
+						<li>credential programs</li>
+						<li>academic preperations</li>
+						<li>adult education at community colleges</li>
+					</ui>
+				</section>
+				<section>
+					<h3> Checks and Balances </h3>
+					<p>Monitor:</p>
+					<ui>
+						<li># of jobs vs cost</li>
+						<li>participant demographics</li>
+						<li>post employee placement</li>
+						<li>academic preperations</li>
+						<li>adult education at community colleges</li>
+					</ui>
+				</section>	
+				</section>			
+				<section>
+					<p>42,000 jobs for 1,700,000 young people living in poverty in California doesn't seem like enough</p>
+					<p><small>but it helps</small></p>
+					</p>
+					<small>
+					<ul>
+						<li>What type of jobs would be done?</li>
+						<li>What type of multipliers can we expect?</li>
+						<li>What will unemployment rates look like after the policy is enacted?</li>
+						<li>What will poverty rates look like after the policy is enacted?</li>
+						<li> gini? limew? limtip? </li>
+					</ul>
+					</small>
+				</section>
+				<section>
+				<section>
+					<h3> Why does it matter?</h3>
+					<br>
+					<ul>
+						<li>African-American youth unemployment is at 51 percent.</li>
+						<li>20 million missing jobs in the economy</li>
+						<li>"takes the unemployed as they are and tailor makes jobs to their skills"</li>
+					</ul>
+				</section>
+				<section>
+					<h3>youth were hit hard</h3>
+					<img src="reveal.js-3.2.0/PICS/1.png"></img>
+				</section>
+				<section>
+					<img src="reveal.js-3.2.0/PICS/3.png"></img>
+				</section>
+				<section>
+					<img src="reveal.js-3.2.0/PICS/4.png"></img>
+				</section>
+				<section>
+					<img src="reveal.js-3.2.0/PICS/5.png"></img>
+				</section>
+				<section>
+
+<p>In this paper, we study one of the key life cycle labor market facts: that unemployment
+declines as a function of age. We propose a simple model of occupational learning that
+accounts for this fact. Young workers, who are less likely to have found their “true calling,”
+are more likely to separate from employment matches. Hence, our model correctly predicts
+that age differences in unemployment rates are due to age differences in separation rates.
+Our calibrated model does a very good job at quantitatively replicating the age differences
+in unemployment and separation rates observed in the U.S. data. Moreover, labor force
+aging in our model accounts for a significant fraction of the fall in aggregate unemployment
+observed in the past 35 years.</p>
+				</section>
+
+			</section>
+				<section data-autoslide="1000">
+					<img src="http://img.huffingtonpost.com/asset/crop_19_775_4710_2531,scalefit_630_noupscale/55d206361d00002f00144f38.jpeg"></img>
+					<p class = "fragment">questions?</p>
+					<p class = "fragment">comments?</p>
+					<p class = "fragment">concerns?</p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="reveal.js-3.2.0/lib/js/head.min.js"></script>
+		<script src="reveal.js-3.2.0/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'reveal.js-3.2.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js-3.2.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js-3.2.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js-3.2.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js-3.2.0/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'reveal.js-3.2.0/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
