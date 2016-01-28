@@ -52,5 +52,14 @@ gen numjobs = puma_money / .0105 //.0105 is a 10,500 dollar per yr job
 *figure out households w/ youth in them
 egen householdwithyouth = max(age >= 16 & age <= 26), by(serial)
 *youth hh's living in poverty
-gen youthinpov = (householdwithyouth & (poverty <= 150))
+gen youthinpov = (householdwithyouth & (poverty <= 100))
+tab youthinpov if pernum == 1 [fweight = perwt]
+*158 jobs for 5287 households
+
+gen job_money = 0
+replace job_money = 10500 if youthinpov & pernum == 1
+gen newincome = hhinc+job_money
+
+sgini newincome if pernum == 1 [fweight=hhwt]
+sgini hhinc if pernum == 1 [fweight=hhwt]
 
