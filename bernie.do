@@ -46,7 +46,7 @@ gen state_money = 1000 * .02 + 1000 * youth_percentage_state + 1000 * unemployed
 
 egen npumas = nvals(puma), by(statefip)
 
-gen puma_money = (state_money/4) * (1/npumas + youth_percentage + unemployed_percentage + disadvantaged_percentage)
+gen puma_money = (state_money/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
 gen numjobs = puma_money / .0105 //.0105 is a 10,500 dollar per yr job
 
 *figure out households w/ youth in them
