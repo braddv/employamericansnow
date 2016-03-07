@@ -15,21 +15,25 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
-egen youth_state = total(perwt * (age <= 25 & age >= 16)), by(statefip) 
-egen youth_puma = total(perwt * (age <= 25 & age >= 16)), by(statefip puma) 
+gen youth = (age <= 25 & age >= 16)
+gen disadvantaged_youth = (youth & (poverty <= 125))
+gen unemployed = (empstat == 2)
+
+egen youth_state = total(perwt * youth), by(statefip) 
+egen youth_puma = total(perwt * youth), by(statefip puma) 
 *sum youth_puma if statefip == 06 & puma == 3703 
 *25371 youth in lancaster
 gen youth_percentage = youth_puma / youth_state
 
-egen unemployed_state = total(perwt * (empstat == 2)), by(statefip)
-egen unemployed_puma = total(perwt * (empstat == 2)), by(statefip puma)
+egen unemployed_state = total(perwt * unemployed), by(statefip)
+egen unemployed_puma = total(perwt * unemployed), by(statefip puma)
 
 gen unemployed_percentage = unemployed_puma / unemployed_state
 
 *sum youth_puma if statefip == 06 & puma == 3703 
 *5797 youth in lancaster
 
-egen disadvantaged_state = total(perwt * ((age <= 25 & age >= 16) & poverty <= 125)), by(statefip)
+egen disadvantaged_state = total(perwt * disadvantaged_youth), by(statefip)
 egen disadvantaged_puma = total(perwt * ((age <= 25 & age >= 16) & poverty <= 125)), by(statefip puma)
 
 gen disadvantaged_percentage = disadvantaged_puma / disadvantaged_state
