@@ -401,7 +401,7 @@
             .attr('class', 'key')
             .style('border-top-color', String)
             .text(function(d) {
-              return colorScale.invertExtent(d)[0];
+              return colorScale.invertExtent(d);
             });
 
       }
