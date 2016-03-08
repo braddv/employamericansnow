@@ -85,6 +85,29 @@
         left: 0;
         top: 0;
       }
+      #legend {
+          padding: 1.5em 0 0 1.5em;
+      }
+
+      li.key {
+          border-top-width: 15px;
+          border-top-style: solid;
+          font-size: .75em;
+          width: 10%;
+          padding-left: 10px;
+          padding-right: 10px;
+          display: inline;
+      }
+
+      path.land {
+          fill: #eee;
+          stroke: #ddd;
+      }
+
+      path.state {
+          stroke: #eee;
+          stroke-width: 1;
+      }
 
     </style>
   </head>
@@ -98,6 +121,9 @@
           <label>in <select id="year"></select></label>
           <span id="status"></span>
         </p>
+        <div id="legend">
+        <small>millions of dollars</small>
+        </div>
       </form>
       <div id="map-container">
         <img id="placeholder" alt="placeholder image for old browsers" src="placeholder.png">
@@ -148,9 +174,9 @@
           field = fields[2],
           colorField = fields[3],
           year = years[1],
-          colors = colorbrewer.RdYlBu[3]
-            .reverse()
-            .map(function(rgb) { return d3.hsl(rgb); });
+          colors = colorbrewer.YlGn[3]
+            .map(function(rgb) { return d3.hsl(rgb); }),
+          colorScale = d3.scale.quantize().range(colorbrewer.YlGn[3]);
 
       var body = d3.select("body"),
           stat = d3.select("#status");
@@ -328,6 +354,8 @@
           .range(colors)
           .domain([moneylo, d3.mean(money), moneyhi]);
 
+        colorScale.domain([moneylo, d3.mean(money), moneyhi]);
+
         // normalize the scale to positive numbers
         var scale = d3.scale.linear()
           .domain([lo, hi])
@@ -359,6 +387,23 @@
         var delta = (Date.now() - start) / 1000;
         stat.text(["calculated in", delta.toFixed(1), "seconds"].join(" "));
         body.classed("updating", false);
+
+
+        var legend = d3.select('#legend')
+          .append('ul')
+            .attr('list-style-type', 'none')
+            .attr('class', 'list-inline');
+
+        var keys = legend.selectAll('li.key')
+          .data(colorScale.range());
+
+        keys.enter().append('li')
+            .attr('class', 'key')
+            .style('border-top-color', String)
+            .text(function(d) {
+              return colorScale.invertExtent(d)[0];
+            });
+
       }
 
       var deferredUpdate = (function() {
@@ -421,6 +466,10 @@
           });
         }
       }
+
+
+
+
 
     </script>
   </body>
