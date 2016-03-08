@@ -34,13 +34,13 @@ gen unemployed_percentage = unemployed_puma / unemployed_state
 *5797 youth in lancaster
 
 egen disadvantaged_state = total(perwt * disadvantaged_youth), by(statefip)
-egen disadvantaged_puma = total(perwt * ((age <= 25 & age >= 16) & poverty <= 125)), by(statefip puma)
+egen disadvantaged_puma = total(perwt * disadvantaged_youth), by(statefip puma)
 
 gen disadvantaged_percentage = disadvantaged_puma / disadvantaged_state
 
-egen youth_total = total(perwt * (age <= 25 & age >= 16))
-egen unemployed_total = total(perwt * (empstat == 2))
-egen disadvantaged_total = total(perwt * ((age <= 25 & age >= 16) & poverty <= 125))
+egen youth_total = total(perwt * youth)
+egen unemployed_total = total(perwt * unemployed)
+egen disadvantaged_total = total(perwt * disadvantaged_youth)
 
 gen youth_percentage_state = youth_state/youth_total
 gen unemployed_percentage_state = unemployed_state/unemployed_total
@@ -51,10 +51,12 @@ gen state_money = 1000 * .02 + 1000 * youth_percentage_state + 1000 * unemployed
 egen npumas = nvals(puma), by(statefip)
 
 gen puma_money = (state_money/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
-gen numjobs = puma_money / .0105 //.0105 is a 10,500 dollar per yr job
+gen numjobs = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
+//alternatively, could be doled out as 48 weeks of $15/hr pay 15 hrs a week
+
 
 *figure out households w/ youth in them
-egen householdwithyouth = max(age >= 16 & age <= 26), by(serial)
+egen householdwithyouth = max(youth), by(serial)
 *youth hh's living in poverty
 gen youthinpov = (householdwithyouth & (poverty <= 100))
 tab youthinpov if pernum == 1 [fweight = perwt]
@@ -66,4 +68,10 @@ gen newincome = inctot+job_money
 
 sgini newincome if pernum == 1 [fweight=hhwt]
 sgini inctot if pernum == 1 [fweight=hhwt]
+
+/* collapse (mean) state_money, by(statefip)
+
+. export delimited using "/Users/braddv/Desktop/BERNIE/state_money.csv",
+how to collapse without losing data? or i guess just use file again. 
+*/
 

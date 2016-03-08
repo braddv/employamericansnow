@@ -124,6 +124,7 @@
             // {name: "Estimate Base", id: "censuspop", key: "ESTIMATESBASE%d", years: [2010]},
             {name: "Population Estimate", id: "popest", key: "POPESTIMATE%d"},
             {name: "Youth Estimate", id: "youthest", key: "YOUTHESTIMATE%d"},
+            {name: "State Money", id: "statemon", key: "STATEMONEY%d"},
             {name: "Population Change", id: "popchange", key: "NPOPCHG_%d", format: "+,"},
             {name: "Births", id: "births", key: "BIRTHS%d"},
             {name: "Deaths", id: "deaths", key: "DEATHS%d"},
@@ -139,14 +140,14 @@
             {name: "Net Domestic Migration Rate", id: "domesticmigrate", key: "RDOMESTICMIG%d", years: [2011], format: percent},
             {name: "Net Migration Rate", id: "netmigrate", key: "RNETMIG%d", years: [2011], format: percent},
           ],
-          years = [2010, 2011, 2014],
+          years = [2010, 2011],
           fieldsById = d3.nest()
             .key(function(d) { return d.id; })
             .rollup(function(d) { return d[0]; })
             .map(fields),
           field = fields[2],
-          colorField = fields[2],
-          year = years[2],
+          colorField = fields[3],
+          year = years[1],
           colors = colorbrewer.RdYlBu[3]
             .reverse()
             .map(function(rgb) { return d3.hsl(rgb); });
@@ -240,7 +241,7 @@
       d3.json(url, function(topo) {
         topology = topo;
         geometries = topology.objects.states.geometries;
-        d3.csv("data/nst_2011.csv", function(data) {
+        d3.csv("data/nst_2011n.csv", function(data) {
           rawData = data;
           dataById = d3.nest()
             .key(function(d) { return d.NAME; })
@@ -311,11 +312,21 @@
             lo = values[0],
             hi = values[values.length - 1];
 
+        var colorMoney = function(d) {
+                return +d.properties[colorField.key.replace("%d",year)]
+              },
+              money = states.data()
+              .map(colorMoney)
+              .filter(function(n) {
+                return !isNaN(n);
+              })
+              .sort(d3.ascending),
+              moneylo = money[0],
+              moneyhi = money[money.length - 1];
+
         var color = d3.scale.linear()
           .range(colors)
-          .domain(lo < 0
-            ? [lo, 0, hi]
-            : [lo, d3.mean(values), hi]);
+          .domain([moneylo, d3.mean(money), moneyhi]);
 
         // normalize the scale to positive numbers
         var scale = d3.scale.linear()
@@ -341,7 +352,7 @@
           .duration(750)
           .ease("linear")
           .attr("fill", function(d) {
-            return color(value(d));
+            return color(colorMoney(d));
           })
           .attr("d", carto.path);
 
