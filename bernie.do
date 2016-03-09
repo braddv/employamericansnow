@@ -19,6 +19,10 @@ gen youth = (age <= 25 & age >= 16)
 gen disadvantaged_youth = (youth & (poverty <= 125))
 gen unemployed = (empstat == 2)
 
+egen youth_in_hh = max(youth), by(serial)
+egen unemployed_in_hh = max(unemployed), by(serial)
+egen disadvantaged_hh = max(disadvantaged_youth), by(serial)
+
 egen youth_state = total(perwt * youth), by(statefip) 
 egen youth_puma = total(perwt * youth), by(statefip puma) 
 *sum youth_puma if statefip == 06 & puma == 3703 
