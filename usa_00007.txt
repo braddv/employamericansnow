@@ -1,0 +1,1746 @@
+Description: Revision of (Revision of (2013-2014 (Revision of (Revision of (age employment puma)) with income and poverty status))))
+Samples selected:
+      2013 ACS
+            Note: 
+            Density of the full data file:  1.0%
+            Density of your extract: 1.0%
+
+      2014 ACS
+            Note: 
+            Density of the full data file:  1.0%
+            Density of your extract: 1.0%
+
+File Type:                    rectangular
+Case Selection:               No
+  Variable               Columns        Len    2013    2014   
+  YEAR               H   1-4            4      X       X 
+  DATANUM            H   5-6            2      X       X 
+  SERIAL             H   7-14           8      X       X 
+  NUMPREC            H  15-16           2      X       X 
+  HHWT               H  17-26          10      X       X 
+  STATEFIP           H  27-28           2      X       X 
+  MET2013            H  29-33           5      X       X 
+  PUMA               H  34-38           5      X       X 
+  GQ                 H  39              1      X       X 
+  RENTGRS            H  40-43           4      X       X 
+  HHINCOME           H  44-50           7      X       X 
+  PERNUM             P  51-54           4      X       X 
+  PERWT              P  55-64          10      X       X 
+  AGE                P  65-67           3      X       X 
+  RACE               P  68              1      X       X 
+  RACED              P  69-71           3      X       X 
+  SCHOOL             P  72              1      X       X 
+  EDUC               P  73-74           2      X       X 
+  EDUCD              P  75-77           3      X       X 
+  EMPSTAT            P  78              1      X       X 
+  EMPSTATD           P  79-80           2      X       X 
+  LABFORCE           P  81              1      X       X 
+  OCC                P  82-85           4      X       X 
+  OCC2010            P  86-89           4      X       X 
+  IND                P  90-93           4      X       X 
+  CLASSWKR           P  94              1      X       X 
+  CLASSWKRD          P  95-96           2      X       X 
+  UHRSWORK           P  97-98           2      X       X 
+  LOOKING            P  99              1      X       X 
+  AVAILBLE           P 100              1      X       X 
+  INCTOT             P 101-107          7      X       X 
+  FTOTINC            P 108-114          7      X       X 
+  INCWAGE            P 115-120          6      X       X 
+  INCWELFR           P 121-125          5      X       X 
+  POVERTY            P 126-128          3      X       X 
+  AGE_HEAD           P 129-131          3      X       X 
+
+Variable Availability Key:
+All Years X - available in this sample
+All Years . - not available in this sample
+
+
+ YEAR		Census year
+1850		1850
+1860		1860
+1870		1870
+1880		1880
+1900		1900
+1910		1910
+1920		1920
+1930		1930
+1940		1940
+1950		1950
+1960		1960
+1970		1970
+1980		1980
+1990		1990
+2000		2000
+2001		2001
+2002		2002
+2003		2003
+2004		2004
+2005		2005
+2006		2006
+2007		2007
+2008		2008
+2009		2009
+2010		2010
+2011		2011
+2012		2012
+2013		2013
+2014		2014
+
+ NUMPREC		Number of person records following
+00		Vacant household
+01		1 person record
+02		2
+03		3
+04		4
+05		5
+06		6
+07		7
+08		8
+09		9
+10		10
+11		11
+12		12
+13		13
+14		14
+15		15
+16		16
+17		17
+18		18
+19		19
+20		20
+21		21
+22		22
+23		23
+24		24
+25		25
+26		26
+27		27
+28		28
+29		29
+30		30
+
+ STATEFIP		State (FIPS code)
+01		Alabama
+02		Alaska
+04		Arizona
+05		Arkansas
+06		California
+08		Colorado
+09		Connecticut
+10		Delaware
+11		District of Columbia
+12		Florida
+13		Georgia
+15		Hawaii
+16		Idaho
+17		Illinois
+18		Indiana
+19		Iowa
+20		Kansas
+21		Kentucky
+22		Louisiana
+23		Maine
+24		Maryland
+25		Massachusetts
+26		Michigan
+27		Minnesota
+28		Mississippi
+29		Missouri
+30		Montana
+31		Nebraska
+32		Nevada
+33		New Hampshire
+34		New Jersey
+35		New Mexico
+36		New York
+37		North Carolina
+38		North Dakota
+39		Ohio
+40		Oklahoma
+41		Oregon
+42		Pennsylvania
+44		Rhode Island
+45		South Carolina
+46		South Dakota
+47		Tennessee
+48		Texas
+49		Utah
+50		Vermont
+51		Virginia
+53		Washington
+54		West Virginia
+55		Wisconsin
+56		Wyoming
+		State groups (1980 Urban/rural sample):
+61		Maine-New Hampshire-Vermont
+62		Massachusetts-Rhode Island
+63		Minnesota-Iowa-Missouri-Kansas-Nebraska-S.Dakota-N.Dakota
+64		Maryland-Delaware
+65		Montana-Idaho-Wyoming
+66		Utah-Nevada
+67		Arizona-New Mexico
+68		Alaska-Hawaii
+72		Puerto Rico
+97		Military/Mil. Reservation
+99		State not identified
+
+ MET2013		Metropolitan area, 2013 OMB delineations
+00000		Not in identifiable area
+10420		Akron, OH
+10580		Albany-Schenectady-Troy, NY
+10740		Albuquerque, NM
+10780		Alexandria, LA
+10900		Allentown-Bethlehem-Easton, PA-NJ
+11020		Altoona, PA
+11100		Amarillo, TX
+11260		Anchorage, AK
+11460		Ann Arbor, MI
+11500		Anniston-Oxford-Jacksonville, AL
+11700		Asheville, NC
+12020		Athens-Clarke County, GA
+12060		Atlanta-Sandy Springs-Roswell, GA
+12100		Atlantic City-Hammonton, NJ
+12220		Auburn-Opelika, AL
+12260		Augusta-Richmond County, GA-SC
+12420		Austin-Round Rock, TX
+12540		Bakersfield, CA
+12580		Baltimore-Columbia-Towson, MD
+12620		Bangor, ME
+12700		Barnstable Town, MA
+12940		Baton Rouge, LA
+12980		Battle Creek, MI
+13140		Beaumont-Port Arthur, TX
+13380		Bellingham, WA
+13460		Bend-Redmond, OR
+13740		Billings, MT
+13780		Binghamton, NY
+13820		Birmingham-Hoover, AL
+13900		Bismarck, ND
+13980		Blacksburg-Christiansburg-Radford, VA
+14010		Bloomington, IL
+14020		Bloomington, IN
+14260		Boise City, ID
+14460		Boston-Cambridge-Newton, MA-NH
+14740		Bremerton-Silverdale, WA
+14860		Bridgeport-Stamford-Norwalk, CT
+15180		Brownsville-Harlingen, TX
+15380		Buffalo-Cheektowaga-Niagara Falls, NY
+15500		Burlington, NC
+15540		Burlington-South Burlington, VT
+15940		Canton-Massillon, OH
+15980		Cape Coral-Fort Myers, FL
+16580		Champaign-Urbana, IL
+16620		Charleston, WV
+16700		Charleston-North Charleston, SC
+16740		Charlotte-Concord-Gastonia, NC-SC
+16820		Charlottesville, VA
+16860		Chattanooga, TN-GA
+16980		Chicago-Naperville-Elgin, IL-IN-WI
+17020		Chico, CA
+17140		Cincinnati, OH-KY-IN
+17300		Clarksville, TN-KY
+17460		Cleveland-Elyria, OH
+17660		Coeur d'Alene, ID
+17780		College Station-Bryan, TX
+17820		Colorado Springs, CO
+17860		Columbia, MO
+17900		Columbia, SC
+18140		Columbus, OH
+18580		Corpus Christi, TX
+19100		Dallas-Fort Worth-Arlington, TX
+19300		Daphne-Fairhope-Foley, AL
+19340		Davenport-Moline-Rock Island, IA-IL
+19380		Dayton, OH
+19460		Decatur, AL
+19500		Decatur, IL
+19660		Deltona-Daytona Beach-Ormond Beach, FL
+19740		Denver-Aurora-Lakewood, CO
+19780		Des Moines-West Des Moines, IA
+19820		Detroit-Warren-Dearborn, MI
+20100		Dover, DE
+20500		Durham-Chapel Hill, NC
+20700		East Stroudsburg, PA
+20740		Eau Claire, WI
+20940		El Centro, CA
+21060		Elizabethtown-Fort Knox, KY
+21140		Elkhart-Goshen, IN
+21340		El Paso, TX
+21500		Erie, PA
+21660		Eugene, OR
+21780		Evansville, IN-KY
+22140		Farmington, NM
+22180		Fayetteville, NC
+22220		Fayetteville-Springdale-Rogers, AR-MO
+22380		Flagstaff, AZ
+22420		Flint, MI
+22500		Florence, SC
+22520		Florence-Muscle Shoals, AL
+22660		Fort Collins, CO
+23060		Fort Wayne, IN
+23420		Fresno, CA
+23460		Gadsden, AL
+23540		Gainesville, FL
+23580		Gainesville, GA
+24020		Glens Falls, NY
+24140		Goldsboro, NC
+24300		Grand Junction, CO
+24340		Grand Rapids-Wyoming, MI
+24540		Greeley, CO
+24660		Greensboro-High Point, NC
+24780		Greenville, NC
+24860		Greenville-Anderson-Mauldin, SC
+25060		Gulfport-Biloxi-Pascagoula, MS
+25220		Hammond, LA
+25260		Hanford-Corcoran, CA
+25420		Harrisburg-Carlisle, PA
+25500		Harrisonburg, VA
+25540		Hartford-West Hartford-East Hartford, CT
+25620		Hattiesburg, MS
+25860		Hickory-Lenoir-Morganton, NC
+25940		Hilton Head Island-Bluffton-Beaufort, SC
+26140		Homosassa Springs, FL
+26380		Houma-Thibodaux, LA
+26420		Houston-The Woodlands-Sugar Land, TX
+26620		Huntsville, AL
+26900		Indianapolis-Carmel-Anderson, IN
+26980		Iowa City, IA
+27060		Ithaca, NY
+27100		Jackson, MI
+27140		Jackson, MS
+27180		Jackson, TN
+27260		Jacksonville, FL
+27340		Jacksonville, NC
+27500		Janesville-Beloit, WI
+27620		Jefferson City, MO
+27780		Johnstown, PA
+27900		Joplin, MO
+28020		Kalamazoo-Portage, MI
+28100		Kankakee, IL
+28140		Kansas City, MO-KS
+28420		Kennewick-Richland, WA
+28660		Killeen-Temple, TX
+28700		Kingsport-Bristol-Bristol, TN-VA
+28940		Knoxville, TN
+29100		La Crosse-Onalaska, WI-MN
+29180		Lafayette, LA
+29200		Lafayette-West Lafayette, IN
+29340		Lake Charles, LA
+29420		Lake Havasu City-Kingman, AZ
+29460		Lakeland-Winter Haven, FL
+29540		Lancaster, PA
+29620		Lansing-East Lansing, MI
+29700		Laredo, TX
+29740		Las Cruces, NM
+29820		Las Vegas-Henderson-Paradise, NV
+29940		Lawrence, KS
+30140		Lebanon, PA
+30340		Lewiston-Auburn, ME
+30620		Lima, OH
+30700		Lincoln, NE
+30780		Little Rock-North Little Rock-Conway, AR
+31080		Los Angeles-Long Beach-Anaheim, CA
+31140		Louisville/Jefferson County, KY-IN
+31180		Lubbock, TX
+31340		Lynchburg, VA
+31460		Madera, CA
+31700		Manchester-Nashua, NH
+31900		Mansfield, OH
+32420		Mayagüez, PR
+32580		McAllen-Edinburg-Mission, TX
+32780		Medford, OR
+32820		Memphis, TN-MS-AR
+32900		Merced, CA
+33100		Miami-Fort Lauderdale-West Palm Beach, FL
+33140		Michigan City-La Porte, IN
+33260		Midland, TX
+33340		Milwaukee-Waukesha-West Allis, WI
+33460		Minneapolis-St. Paul-Bloomington, MN-WI
+33660		Mobile, AL
+33700		Modesto, CA
+33740		Monroe, LA
+33780		Monroe, MI
+33860		Montgomery, AL
+34060		Morgantown, WV
+34620		Muncie, IN
+34740		Muskegon, MI
+34820		Myrtle Beach-Conway-North Myrtle Beach, SC-NC
+34900		Napa, CA
+34940		Naples-Immokalee-Marco Island, FL
+34980		Nashville-Davidson--Murfreesboro--Franklin, TN
+35300		New Haven-Milford, CT
+35380		New Orleans-Metairie, LA
+35620		New York-Newark-Jersey City, NY-NJ-PA
+35660		Niles-Benton Harbor, MI
+35840		North Port-Sarasota-Bradenton, FL
+35980		Norwich-New London, CT
+36100		Ocala, FL
+36140		Ocean City, NJ
+36220		Odessa, TX
+36260		Ogden-Clearfield, UT
+36420		Oklahoma City, OK
+36500		Olympia-Tumwater, WA
+36540		Omaha-Council Bluffs, NE-IA
+36740		Orlando-Kissimmee-Sanford, FL
+36780		Oshkosh-Neenah, WI
+36980		Owensboro, KY
+37100		Oxnard-Thousand Oaks-Ventura, CA
+37340		Palm Bay-Melbourne-Titusville, FL
+37460		Panama City, FL
+37620		Parkersburg-Vienna, WV
+37860		Pensacola-Ferry Pass-Brent, FL
+37900		Peoria, IL
+37980		Philadelphia-Camden-Wilmington, PA-NJ-DE-MD
+38060		Phoenix-Mesa-Scottsdale, AZ
+38300		Pittsburgh, PA
+38340		Pittsfield, MA
+38660		Ponce, PR
+38860		Portland-South Portland, ME
+38900		Portland-Vancouver-Hillsboro, OR-WA
+38940		Port St. Lucie, FL
+39140		Prescott, AZ
+39300		Providence-Warwick, RI-MA
+39340		Provo-Orem, UT
+39380		Pueblo, CO
+39460		Punta Gorda, FL
+39540		Racine, WI
+39580		Raleigh, NC
+39740		Reading, PA
+39820		Redding, CA
+39900		Reno, NV
+40060		Richmond, VA
+40140		Riverside-San Bernardino-Ontario, CA
+40220		Roanoke, VA
+40380		Rochester, NY
+40420		Rockford, IL
+40580		Rocky Mount, NC
+40900		Sacramento--Roseville--Arden-Arcade, CA
+40980		Saginaw, MI
+41060		St. Cloud, MN
+41100		St. George, UT
+41140		St. Joseph, MO-KS
+41180		St. Louis, MO-IL
+41500		Salinas, CA
+41540		Salisbury, MD-DE
+41620		Salt Lake City, UT
+41660		San Angelo, TX
+41700		San Antonio-New Braunfels, TX
+41740		San Diego-Carlsbad, CA
+41860		San Francisco-Oakland-Hayward, CA
+41900		San Germán, PR
+41940		San Jose-Sunnyvale-Santa Clara, CA
+41980		San Juan-Carolina-Caguas, PR
+42020		San Luis Obispo-Paso Robles-Arroyo Grande, CA
+42100		Santa Cruz-Watsonville, CA
+42140		Santa Fe, NM
+42200		Santa Maria-Santa Barbara, CA
+42220		Santa Rosa, CA
+42540		Scranton--Wilkes-Barre--Hazleton, PA
+42660		Seattle-Tacoma-Bellevue, WA
+42680		Sebastian-Vero Beach, FL
+43100		Sheboygan, WI
+43340		Shreveport-Bossier City, LA
+43900		Spartanburg, SC
+44060		Spokane-Spokane Valley, WA
+44100		Springfield, IL
+44140		Springfield, MA
+44180		Springfield, MO
+44220		Springfield, OH
+44300		State College, PA
+44700		Stockton-Lodi, CA
+44940		Sumter, SC
+45060		Syracuse, NY
+45220		Tallahassee, FL
+45300		Tampa-St. Petersburg-Clearwater, FL
+45460		Terre Haute, IN
+45780		Toledo, OH
+45820		Topeka, KS
+45940		Trenton, NJ
+46060		Tucson, AZ
+46220		Tuscaloosa, AL
+46340		Tyler, TX
+46520		Urban Honolulu, HI
+46540		Utica-Rome, NY
+46660		Valdosta, GA
+46700		Vallejo-Fairfield, CA
+47220		Vineland-Bridgeton, NJ
+47260		Virginia Beach-Norfolk-Newport News, VA-NC
+47300		Visalia-Porterville, CA
+47380		Waco, TX
+47900		Washington-Arlington-Alexandria, DC-VA-MD-WV
+48140		Wausau, WI
+48300		Wenatchee, WA
+48620		Wichita, KS
+48660		Wichita Falls, TX
+48700		Williamsport, PA
+48900		Wilmington, NC
+49180		Winston-Salem, NC
+49340		Worcester, MA-CT
+49420		Yakima, WA
+49620		York-Hanover, PA
+49660		Youngstown-Warren-Boardman, OH-PA
+49700		Yuba City, CA
+49740		Yuma, AZ
+
+ GQ		Group quarters status
+0		Vacant unit
+		Households:
+1		Households under 1970 definition
+2		Additional households under 1990 definition
+		Group Quarters:
+3		Group quarters--Institutions
+4		Other group quarters
+5		Additional households under 2000 definition
+6		Fragment
+
+ AGE		Age
+000		Less than 1 year old
+001		1
+002		2
+003		3
+004		4
+005		5
+006		6
+007		7
+008		8
+009		9
+010		10
+011		11
+012		12
+013		13
+014		14
+015		15
+016		16
+017		17
+018		18
+019		19
+020		20
+021		21
+022		22
+023		23
+024		24
+025		25
+026		26
+027		27
+028		28
+029		29
+030		30
+031		31
+032		32
+033		33
+034		34
+035		35
+036		36
+037		37
+038		38
+039		39
+040		40
+041		41
+042		42
+043		43
+044		44
+045		45
+046		46
+047		47
+048		48
+049		49
+050		50
+051		51
+052		52
+053		53
+054		54
+055		55
+056		56
+057		57
+058		58
+059		59
+060		60
+061		61
+062		62
+063		63
+064		64
+065		65
+066		66
+067		67
+068		68
+069		69
+070		70
+071		71
+072		72
+073		73
+074		74
+075		75
+076		76
+077		77
+078		78
+079		79
+080		80
+081		81
+082		82
+083		83
+084		84
+085		85
+086		86
+087		87
+088		88
+089		89
+090		90 (90+ in 1980 and 1990)
+091		91
+092		92
+093		93
+094		94
+095		95
+096		96
+097		97
+098		98
+099		99
+100		100 (100+ in 1960-1970)
+101		101
+102		102
+103		103
+104		104
+105		105
+106		106
+107		107
+108		108
+109		109
+110		110
+111		111
+112		112 (112+ in the 1980 internal data)
+113		113
+114		114
+115		115 (115+ in the 1990 internal data)
+116		116
+117		117
+118		118
+119		119
+120		120
+121		121
+122		122
+123		123
+124		124
+125		125
+126		126
+129		129
+130		130
+135		135
+
+ RACE		Race [general version]
+1		White
+2		Black/Negro
+3		American Indian or Alaska Native
+4		Chinese
+5		Japanese
+6		Other Asian or Pacific Islander
+7		Other race, nec
+8		Two major races
+9		Three or more major races
+
+ RACED		Race [detailed version]
+		ONE MAJOR RACE GROUP
+100		White
+110		Spanish write_in
+120		Blank (white) (1850)
+130		Portuguese
+140		Mexican (1930)
+150		Puerto Rican (1910 Hawaii)
+200		Black/Negro
+210		Mulatto
+300		American Indian/Alaska Native
+		American Indian:
+302		Apache
+303		Blackfoot
+304		Cherokee
+305		Cheyenne
+306		Chickasaw
+307		Chippewa
+308		Choctaw
+309		Comanche
+310		Creek
+311		Crow
+312		Iroquois
+313		Kiowa
+314		Lumbee
+315		Navajo
+316		Osage
+317		Paiute
+318		Pima
+319		Potawatomi
+320		Pueblo
+321		Seminole
+322		Shoshone
+323		Sioux
+324		Tlingit (Tlingit_Haida, 2000/ACS)
+325		Tohono O Odham
+326		All other tribes (1990)
+328		Hopi
+329		Central American Indian
+330		Spanish American Indian
+350		Delaware
+351		Latin American Indian
+352		Puget Sound Salish
+353		Yakama
+354		Yaqui
+355		Colville
+356		Houma
+357		Menominee
+358		Yuman
+359		South American Indian
+360		Mexican American Indian
+361		Other Amer. Indian tribe (2000,ACS)
+362		2+ Amer. Indian tribes (2000,ACS)
+		Alaskan Native:
+370		Alaskan Athabaskan
+371		Aleut
+372		Eskimo
+373		Alaskan mixed
+374		Inupiat
+375		Yup'ik
+379		Other Alaska Native tribe(s) (2000,ACS)
+398		Both Am. Ind. and Alaska Native (2000,ACS)
+399		Tribe not specified
+		Asian or Pacific Islander:
+400		Chinese
+410		Taiwanese
+420		Chinese and Taiwanese
+500		Japanese
+600		Filipino
+610		Asian Indian (Hindu 1920_1940)
+620		Korean
+630		Hawaiian
+631		Hawaiian and Asian (1900,1920)
+632		Hawaiian and European (1900,1920)
+634		Hawaiian mixed
+640		Vietnamese
+641		   Bhutanese
+642		   Mongolian 
+643		   Nepalese
+650		Other Asian or Pacific Islander (1920,1980)
+651		Asian only (CPS)
+652		Pacific Islander only (CPS)
+653		Asian or Pacific Islander, n.s. (1990 Internal Census files)
+660		Cambodian
+661		Hmong
+662		Laotian
+663		Thai
+664		Bangladeshi
+665		Burmese
+666		Indonesian
+667		Malaysian
+668		Okinawan
+669		Pakistani
+670		Sri Lankan
+671		Other Asian, n.e.c.
+672		Asian, not specified
+		Two or more Asian races
+673		Chinese and Japanese
+674		Chinese and Filipino
+675		Chinese and Vietnamese
+676		Chinese and Asian write_in
+677		Japanese and Filipino
+678		Asian Indian and Asian write_in
+679		Other Asian race combinations
+		Polynesian region (also includes Hawaii):
+680		Samoan
+681		Tahitian
+682		Tongan
+683		Other Polynesian (1990)
+684		1+ other Polynesian races (2000,ACS)
+		Micronesian region:
+685		Guamanian/Chamorro
+686		Northern Mariana Islander
+687		Palauan
+688		Other Micronesian (1990)
+689		1+ other Micronesian races (2000,ACS)
+		Melanesian region:
+690		Fijian
+691		Other Melanesian (1990)
+692		1+ other Melanesian races (2000,ACS)
+		Pacific Islanders from two or more PI regions:
+698		2+ PI races from 2+ PI regions
+699		Pacific Islander, n.s.
+700		Other race, n.e.c.
+		Two major race groups:
+801		White and Black
+802		White and AIAN
+810		White and Asian
+811		White and Chinese
+812		White and Japanese
+813		White and Filipino
+814		White and Asian Indian
+815		White and Korean
+816		White and Vietnamese
+817		White and Asian write_in
+818		White and other Asian race(s)
+819		White and two or more Asian groups
+820		White and PI  
+821		White and Native Hawaiian
+822		White and Samoan
+823		White and Guamanian
+824		White and PI write_in
+825		White and other PI race(s)
+826		White and other race write_in
+827		White and other race, n.e.c.
+830		Black and AIAN
+831		Black and Asian
+832		Black and Chinese
+833		Black and Japanese
+834		Black and Filipino
+835		Black and Asian Indian
+836		Black and Korean
+837		Black and Asian write_in
+838		Black and other Asian race(s)
+840		Black and PI
+841		Black and PI write_in
+842		Black and other PI race(s)
+845		Black and other race write_in
+850		AIAN and Asian
+851		AIAN and Filipino (2000 1%)
+852		AIAN and Asian Indian
+853		AIAN and Asian write_in (2000 1%)
+854		AIAN and other Asian race(s)
+855		AIAN and PI
+856		AIAN and other race write_in
+860		Asian and PI
+861		Chinese and Hawaiian
+862		Chinese, Filipino, Hawaiian (2000 1%)
+863		Japanese and Hawaiian (2000 1%)
+864		Filipino and Hawaiian
+865		Filipino and PI write_in
+866		Asian Indian and PI write_in (2000 1%)
+867		Asian write_in and PI write_in
+868		Other Asian race(s) and PI race(s)
+869		Japanese and Korean (ACS)
+880		Asian and other race write_in
+881		Chinese and other race write_in
+882		Japanese and other race write_in
+883		Filipino and other race write_in
+884		Asian Indian and other race write_in
+885		Asian write_in and other race write_in
+886		Other Asian race(s) and other race write_in
+887		      Chinese and Korean
+890		PI and other race write_in: 
+891		PI write_in and other race write_in
+892		Other PI race(s) and other race write_in
+893		         Native Hawaiian or PI other race(s)
+899		API and other race write_in
+		Three major race groups:
+901		White, Black, AIAN
+902		White, Black, Asian
+903		White, Black, PI
+904		White, Black, other race write_in
+905		White, AIAN, Asian
+906		White, AIAN, PI
+907		White, AIAN, other race write_in
+910		White, Asian, PI 
+911		White, Chinese, Hawaiian
+912		White, Chinese, Filipino, Hawaiian (2000 1%)
+913		White, Japanese, Hawaiian (2000 1%)
+914		White, Filipino, Hawaiian
+915		Other White, Asian race(s), PI race(s)
+916		      White, AIAN and Filipino
+917		      White, Black, and Filipino
+920		White, Asian, other race write_in
+921		White, Filipino, other race write_in (2000 1%)
+922		White, Asian write_in, other race write_in (2000 1%)
+923		Other White, Asian race(s), other race write_in (2000 1%)
+925		White, PI, other race write_in
+930		Black, AIAN, Asian
+931		Black, AIAN, PI
+932		Black, AIAN, other race write_in
+933		Black, Asian, PI
+934		Black, Asian, other race write_in
+935		Black, PI, other race write_in
+940		AIAN, Asian, PI
+941		AIAN, Asian, other race write_in
+942		AIAN, PI, other race write_in
+943		Asian, PI, other race write_in
+944		Asian (Chinese, Japanese, Korean, Vietnamese); and Native Hawaiian or PI; and Other
+949		2 or 3 races (CPS)
+		Four major race groups:
+950		White, Black, AIAN, Asian
+951		White, Black, AIAN, PI
+952		White, Black, AIAN, other race write_in
+953		White, Black, Asian, PI
+954		White, Black, Asian, other race write_in
+955		White, Black, PI, other race write_in
+960		White, AIAN, Asian, PI
+961		White, AIAN, Asian, other race write_in
+962		White, AIAN, PI, other race write_in
+963		White, Asian, PI, other race write_in
+964		White, Chinese, Japanese, Native Hawaiian
+970		Black, AIAN, Asian, PI
+971		Black, AIAN, Asian, other race write_in
+972		Black, AIAN, PI, other race write_in
+973		Black, Asian, PI, other race write_in
+974		AIAN, Asian, PI, other race write_in
+975		AIAN, Asian, PI, Hawaiian other race write_in
+976		Two specified Asian  (Chinese and other Asian, Chinese and Japanese, Japanese and other Asian, Korean and other Asian); Native Hawaiian/PI; and Other Race
+		Five major race groups:
+980		White, Black, AIAN, Asian, PI
+981		White, Black, AIAN, Asian, other race write_in
+982		White, Black, AIAN, PI, other race write_in
+983		White, Black, Asian, PI, other race write_in
+984		White, AIAN, Asian, PI, other race write_in
+985		Black, AIAN, Asian, PI, other race write_in
+986		Black, AIAN, Asian, PI, Hawaiian, other race write_in
+989		4 or 5 races (CPS)
+		Six major race groups:
+990		White, Black, AIAN, Asian, PI, other race write_in
+991		White race; Some other race; Black or African American race and/or American Indian and Alaska Native race and/or Asian groups and/or Native Hawaiian and Other Pacific Islander groups
+996		2+ races, n.e.c. (CPS)
+
+ SCHOOL		School attendance
+0		N/A
+1		No, not in school
+2		Yes, in school
+9		Missing
+
+ EDUC		Educational attainment [general version]
+00		N/A or no schooling
+01		Nursery school to grade 4
+02		Grade 5, 6, 7, or 8
+03		Grade 9
+04		Grade 10
+05		Grade 11
+06		Grade 12
+07		1 year of college
+08		2 years of college
+09		3 years of college
+10		4 years of college
+11		5+ years of college
+
+ EDUCD		Educational attainment [detailed version]
+000		N/A or no schooling
+001		N/A
+002		No schooling completed
+010		Nursery school to grade 4
+011		Nursery school, preschool
+012		Kindergarten
+013		Grade 1, 2, 3, or 4
+014		Grade 1
+015		Grade 2
+016		Grade 3
+017		Grade 4
+020		Grade 5, 6, 7, or 8
+021		Grade 5 or 6
+022		Grade 5
+023		Grade 6
+024		Grade 7 or 8
+025		Grade 7
+026		Grade 8
+030		Grade 9
+040		Grade 10
+050		Grade 11
+060		Grade 12
+061		12th grade, no diploma
+062		High school graduate or GED
+063		Regular high school diploma
+064		GED or alternative credential
+065		Some college, but less than 1 year
+070		1 year of college
+071		1 or more years of college credit, no degree
+080		2 years of college
+081		Associate's degree, type not specified
+082		Associate's degree, occupational program
+083		Associate's degree, academic program
+090		3 years of college
+100		4 years of college
+101		Bachelor's degree
+110		5+ years of college
+111		6 years of college (6+ in 1960-1970)
+112		7 years of college
+113		8+ years of college
+114		Master's degree
+115		Professional degree beyond a bachelor's degree
+116		Doctoral degree
+999		Missing
+
+ EMPSTAT		Employment status [general version]
+0		N/A
+1		Employed
+2		Unemployed
+3		Not in labor force
+
+ EMPSTATD		Employment status [detailed version]
+00		N/A
+		In Labor Force
+		Employed
+10		At work
+11		At work, public emerg
+12		Has job, not working
+13		Armed forces
+14		Armed forces--at work
+15		Armed forces--not at work but with job
+20		Unemployed
+21		Unemp, exper worker
+22		Unemp, new worker
+30		Not in Labor Force
+31		NILF, housework
+32		NILF, unable to work
+33		NILF, school
+34		NILF, other
+
+ LABFORCE		Labor force status
+0		N/A
+1		No, not in the labor force
+2		Yes, in the labor force
+
+ OCC2010		Occupation, 2010 basis
+		MANAGEMENT, BUSINESS, SCIENCE, AND ARTS
+0010		Chief executives and legislators/public administration
+0020		General and Operations Managers
+0030		Managers in Marketing, Advertising, and Public Relations
+0100		Administrative Services Managers
+0110		Computer and Information Systems Managers
+0120		Financial Managers
+0130		Human Resources Managers
+0140		Industrial Production Managers
+0150		Purchasing Managers
+0160		Transportation, Storage, and Distribution Managers
+0205		Farmers, Ranchers, and Other Agricultural Managers
+0220		Constructions Managers
+0230		Education Administrators
+0300		Architectural and Engineering Managers
+0310		Food Service and Lodging Managers
+0320		Funeral Directors
+0330		Gaming Managers
+0350		Medical and Health Services Managers
+0360		Natural Science Managers
+0410		Property, Real Estate, and Community Association Managers
+0420		Social and Community Service Managers
+0430		Managers, nec (including Postmasters)
+		BUSINESS OPERATIONS SPECIALISTS
+0500		Agents and Business Managers of Artists, Performers, and Athletes
+0510		Buyers and Purchasing Agents, Farm Products
+0520		Wholesale and Retail Buyers, Except Farm Products
+0530		Purchasing Agents, Except Wholesale, Retail, and Farm Products
+0540		Claims Adjusters, Appraisers, Examiners, and Investigators
+0560		Compliance Officers, Except Agriculture
+0600		Cost Estimators
+0620		Human Resources, Training, and Labor Relations Specialists
+0700		Logisticians
+0710		Management Analysts
+0720		Meeting and Convention Planners
+0730		Other Business Operations and Management Specialists
+		FINANCIAL SPECIALISTS
+0800		Accountants and Auditors
+0810		Appraisers and Assessors of Real Estate
+0820		Budget Analysts
+0830		Credit Analysts
+0840		Financial Analysts
+0850		Personal Financial Advisors
+0860		Insurance Underwriters
+0900		Financial Examiners
+0910		Credit Counselors and Loan Officers
+0930		Tax Examiners and Collectors, and Revenue Agents
+0940		Tax Preparers
+0950		Financial Specialists, nec
+		COMPUTER AND MATHEMATICAL
+1000		Computer Scientists and Systems Analysts/Network systems Analysts/Web Developers
+1010		Computer Programmers
+1020		Software Developers, Applications and Systems Software
+1050		Computer Support Specialists
+1060		Database Administrators
+1100		Network and Computer Systems Administrators
+1200		Actuaries
+1220		Operations Research Analysts
+1230		Statisticians
+1240		Mathematical science occupations, nec
+		ARCHITECTURE AND ENGINEERING
+1300		Architects, Except Naval
+1310		Surveyors, Cartographers, and Photogrammetrists
+1320		Aerospace Engineers
+1350		Chemical Engineers
+1360		Civil Engineers
+1400		Computer Hardware Engineers
+1410		Electrical and Electronics Engineers
+1420		Environmental Engineers
+1430		Industrial Engineers, including Health and Safety
+1440		Marine Engineers and Naval Architects
+1450		Materials Engineers
+1460		Mechanical Engineers
+1520		Petroleum, mining and geological engineers, including mining safety engineers
+1530		Engineers, nec
+1540		Drafters
+		TECHNICIANS
+1550		Engineering Technicians, Except Drafters
+1560		Surveying and Mapping Technicians
+		LIFE, PHYSICAL, AND SOCIAL SCIENCE
+1600		Agricultural and Food Scientists
+1610		Biological Scientists
+1640		Conservation Scientists and Foresters
+1650		Medical Scientists, and Life Scientists, All Other
+1700		Astronomers and Physicists
+1710		Atmospheric and Space Scientists
+1720		Chemists and Materials Scientists
+1740		Environmental Scientists and Geoscientists
+1760		Physical Scientists, nec
+1800		Economists and market researchers
+1810		
+1820		Psychologists
+1830		Urban and Regional Planners
+1840		Social Scientists, nec
+1900		Agricultural and Food Science Technicians
+1910		Biological Technicians
+1920		Chemical Technicians
+1930		Geological and Petroleum Technicians, and Nuclear Technicians
+1960		Life, Physical, and Social Science Technicians, nec
+1980		Professional, Research, or Technical Workers, nec
+		COMMUNITY AND SOCIAL SERVICES
+2000		Counselors
+2010		Social Workers
+2020		Community and Social Service Specialists, nec
+2040		Clergy
+2050		Directors, Religious Activities and Education
+2060		Religious Workers, nec
+		LEGAL
+2100		Lawyers, and judges, magistrates, and other judicial workers
+2140		Paralegals and Legal Assistants
+2150		Legal Support Workers, nec
+		EDUCATION, TRAINING, AND LIBRARY
+2200		Postsecondary Teachers
+2300		Preschool and Kindergarten Teachers
+2310		Elementary and Middle School Teachers
+2320		Secondary School Teachers
+2330		Special Education Teachers
+2340		Other Teachers and Instructors
+2400		Archivists, Curators, and Museum Technicians
+2430		Librarians
+2440		Library Technicians
+2540		Teacher Assistants
+2550		Education, Training, and Library Workers, nec
+		ARTS, DESIGN, ENTERTAINMENT, SPORTS, AND MEDIA
+2600		Artists and Related Workers
+2630		Designers
+2700		Actors, Producers, and Directors
+2720		Athletes, Coaches, Umpires, and Related Workers
+2740		Dancers and Choreographers
+2750		Musicians, Singers, and Related Workers
+2760		Entertainers and Performers, Sports and Related Workers, All Other
+2800		Announcers
+2810		Editors, News Analysts, Reporters, and Correspondents
+2825		Public Relations Specialists
+2840		Technical Writers
+2850		Writers and Authors
+2860		Media and Communication Workers, nec
+2900		Broadcast and Sound Engineering Technicians and Radio Operators, and media and communication equipment workers, all other
+2910		Photographers
+2920		Television, Video, and Motion Picture Camera Operators and Editors
+		HEALTHCARE PRACTITIONERS AND TECHNICAL
+3000		Chiropractors
+3010		Dentists
+3030		Dieticians and Nutritionists
+3040		Optometrists
+3050		Pharmacists
+3060		Physicians and Surgeons
+3110		Physician Assistants
+3120		Podiatrists
+3130		Registered Nurses
+3140		Audiologists
+3150		Occupational Therapists
+3160		Physical Therapists
+3200		Radiation Therapists
+3210		Recreational Therapists
+3220		Respiratory Therapists
+3230		Speech Language Pathologists
+3240		Therapists, nec
+3250		Veterinarians
+3260		Health Diagnosing and Treating Practitioners, nec
+3300		Clinical Laboratory Technologists and Technicians
+3310		Dental Hygienists
+3320		Diagnostic Related Technologists and Technicians
+3400		Emergency Medical Technicians and Paramedics
+3410		Health Diagnosing and Treating Practitioner Support Technicians
+3500		Licensed Practical and Licensed Vocational Nurses
+3510		Medical Records and Health Information Technicians
+3520		Opticians, Dispensing
+3530		Health Technologists and Technicians, nec
+3540		Healthcare Practitioners and Technical Occupations, nec
+		HEALTHCARE SUPPORT
+3600		Nursing, Psychiatric, and Home Health Aides
+3610		Occupational Therapy Assistants and Aides
+3620		Physical Therapist Assistants and Aides
+3630		Massage Therapists
+3640		Dental Assistants
+3650		Medical Assistants and Other Healthcare Support Occupations, nec
+		PROTECTIVE SERVICE
+3700		First-Line Supervisors of Correctional Officers
+3710		First-Line Supervisors of Police and Detectives
+3720		First-Line Supervisors of Fire Fighting and Prevention Workers
+3730		Supervisors, Protective Service Workers, All Other
+3740		Firefighters
+3750		Fire Inspectors
+3800		Sheriffs, Bailiffs, Correctional Officers, and Jailers
+3820		Police Officers and Detectives
+3900		Animal Control
+3910		Private Detectives and Investigators
+3930		Security Guards and Gaming Surveillance Officers
+3940		Crossing Guards
+3950		Law enforcement workers, nec
+		FOOD PREPARATION AND SERVING
+4000		Chefs and Cooks
+4010		First-Line Supervisors of Food Preparation and Serving Workers
+4030		Food Preparation Workers
+4040		Bartenders
+4050		Combined Food Preparation and Serving Workers, Including Fast Food
+4060		Counter Attendant, Cafeteria, Food Concession, and Coffee Shop
+4110		Waiters and Waitresses
+4120		Food Servers, Nonrestaurant
+4130		Food preparation and serving related workers, nec
+4140		Dishwashers
+4150		Host and Hostesses, Restaurant, Lounge, and Coffee Shop
+		BUILDING AND GROUNDS CLEANING AND MAINTENANCE
+4200		First-Line Supervisors of Housekeeping and Janitorial Workers
+4210		First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers
+4220		Janitors and Building Cleaners
+4230		Maids and Housekeeping Cleaners
+4240		Pest Control Workers
+4250		Grounds Maintenance Workers
+		PERSONAL CARE AND SERVICE
+4300		First-Line Supervisors of Gaming Workers
+4320		First-Line Supervisors of Personal Service Workers
+4340		Animal Trainers
+4350		Nonfarm Animal Caretakers
+4400		Gaming Services Workers
+4420		Ushers, Lobby Attendants, and Ticket Takers
+4430		Entertainment Attendants and Related Workers, nec
+4460		Funeral Service Workers and Embalmers
+4500		Barbers
+4510		Hairdressers, Hairstylists, and Cosmetologists
+4520		Personal Appearance Workers, nec
+4530		Baggage Porters, Bellhops, and Concierges
+4540		Tour and Travel Guides
+4600		Childcare Workers
+4610		Personal Care Aides
+4620		Recreation and Fitness Workers
+4640		Residential Advisors
+4650		Personal Care and Service Workers, All Other
+		SALES AND RELATED
+4700		First-Line Supervisors of Sales Workers
+4720		Cashiers
+4740		Counter and Rental Clerks
+4750		Parts Salespersons
+4760		Retail Salespersons
+4800		Advertising Sales Agents
+4810		Insurance Sales Agents
+4820		Securities, Commodities, and Financial Services Sales Agents
+4830		Travel Agents
+4840		Sales Representatives, Services, All Other
+4850		Sales Representatives, Wholesale and Manufacturing
+4900		Models, Demonstrators, and Product Promoters
+4920		Real Estate Brokers and Sales Agents
+4930		Sales Engineers
+4940		Telemarketers
+4950		Door-to-Door Sales Workers, News and Street Vendors, and Related Workers
+4965		Sales and Related Workers, All Other
+		OFFICE AND ADMINISTRATIVE SUPPORT
+5000		First-Line Supervisors of Office and Administrative Support Workers
+5010		Switchboard Operators, Including Answering Service
+5020		Telephone Operators
+5030		Communications Equipment Operators, All Other
+5100		Bill and Account Collectors
+5110		Billing and Posting Clerks
+5120		Bookkeeping, Accounting, and Auditing Clerks
+5130		Gaming Cage Workers
+5140		Payroll and Timekeeping Clerks
+5150		Procurement Clerks
+5160		Bank Tellers
+5165		Financial Clerks, nec
+5200		Brokerage Clerks
+5220		Court, Municipal, and License Clerks
+5230		Credit Authorizers, Checkers, and Clerks
+5240		Customer Service Representatives
+5250		Eligibility Interviewers, Government Programs
+5260		File Clerks
+5300		Hotel, Motel, and Resort Desk Clerks
+5310		Interviewers, Except Eligibility and Loan
+5320		Library Assistants, Clerical
+5330		Loan Interviewers and Clerks
+5340		New Account Clerks
+5350		Correspondent clerks and order clerks
+5360		Human Resources Assistants, Except Payroll and Timekeeping
+5400		Receptionists and Information Clerks
+5410		Reservation and Transportation Ticket Agents and Travel Clerks
+5420		Information and Record Clerks, All Other
+5500		Cargo and Freight Agents
+5510		Couriers and Messengers
+5520		Dispatchers
+5530		Meter Readers, Utilities
+5540		Postal Service Clerks
+5550		Postal Service Mail Carriers
+5560		Postal Service Mail Sorters, Processors, and Processing Machine Operators
+5600		Production, Planning, and Expediting Clerks
+5610		Shipping, Receiving, and Traffic Clerks
+5620		Stock Clerks and Order Fillers
+5630		Weighers, Measurers, Checkers, and Samplers, Recordkeeping
+5700		Secretaries and Administrative Assistants
+5800		Computer Operators
+5810		Data Entry Keyers
+5820		Word Processors and Typists
+5840		Insurance Claims and Policy Processing Clerks
+5850		Mail Clerks and Mail Machine Operators, Except Postal Service
+5860		Office Clerks, General
+5900		Office Machine Operators, Except Computer
+5910		Proofreaders and Copy Markers
+5920		Statistical Assistants
+5940		Office and administrative support workers, nec
+		FARMING, FISHING, AND FORESTRY
+6005		First-Line Supervisors of Farming, Fishing, and Forestry Workers
+6010		Agricultural Inspectors
+6040		Graders and Sorters, Agricultural Products
+6050		Agricultural workers, nec
+6100		Fishing and hunting workers
+6120		Forest and Conservation Workers
+6130		Logging Workers
+		CONSTRUCTION
+6200		First-Line Supervisors of Construction Trades and Extraction Workers
+6210		Boilermakers
+6220		Brickmasons, Blockmasons, and Stonemasons
+6230		Carpenters
+6240		Carpet, Floor, and Tile Installers and Finishers
+6250		Cement Masons, Concrete Finishers, and Terrazzo Workers
+6260		Construction Laborers
+6300		Paving, Surfacing, and Tamping Equipment Operators
+6320		Construction equipment operators except paving, surfacing, and tamping equipment operators
+6330		Drywall Installers, Ceiling Tile Installers, and Tapers
+6355		Electricians
+6360		Glaziers
+6400		Insulation Workers
+6420		Painters, Construction and Maintenance
+6430		Paperhangers
+6440		Pipelayers, Plumbers, Pipefitters, and Steamfitters
+6460		Plasterers and Stucco Masons
+6500		Reinforcing Iron and Rebar Workers
+6515		Roofers
+6520		Sheet Metal Workers, metal-working
+6530		Structural Iron and Steel Workers
+6600		Helpers, Construction Trades
+6660		Construction and Building Inspectors
+6700		Elevator Installers and Repairers
+6710		Fence Erectors
+6720		Hazardous Materials Removal Workers
+6730		Highway Maintenance Workers
+6740		Rail-Track Laying and Maintenance Equipment Operators
+6765		Construction workers, nec
+		EXTRACTION
+6800		Derrick, rotary drill, and service unit operators, and roustabouts, oil, gas, and mining
+6820		Earth Drillers, Except Oil and Gas
+6830		Explosives Workers, Ordnance Handling Experts, and Blasters
+6840		Mining Machine Operators
+6940		Extraction workers, nec
+		INSTALLATION, MAINTENANCE, AND REPAIR
+7000		First-Line Supervisors of Mechanics, Installers, and Repairers
+7010		Computer, Automated Teller, and Office Machine Repairers
+7020		Radio and Telecommunications Equipment Installers and Repairers
+7030		Avionics Technicians
+7040		Electric Motor, Power Tool, and Related Repairers
+7100		Electrical and electronics repairers, transportation equipment, and industrial and utility
+7110		Electronic Equipment Installers and Repairers, Motor Vehicles
+7120		Electronic Home Entertainment Equipment Installers and Repairers
+7125		Electronic Repairs, nec
+7130		Security and Fire Alarm Systems Installers
+7140		Aircraft Mechanics and Service Technicians
+7150		Automotive Body and Related Repairers
+7160		Automotive Glass Installers and Repairers
+7200		Automotive Service Technicians and Mechanics
+7210		Bus and Truck Mechanics and Diesel Engine Specialists
+7220		Heavy Vehicle and Mobile Equipment Service Technicians and Mechanics
+7240		Small Engine Mechanics
+7260		Vehicle and Mobile Equipment Mechanics, Installers, and Repairers, nec
+7300		Control and Valve Installers and Repairers
+7315		Heating, Air Conditioning, and Refrigeration Mechanics and Installers
+7320		Home Appliance Repairers
+7330		Industrial and Refractory Machinery Mechanics
+7340		Maintenance and Repair Workers, General
+7350		Maintenance Workers, Machinery
+7360		Millwrights
+7410		Electrical Power-Line Installers and Repairers
+7420		Telecommunications Line Installers and Repairers
+7430		Precision Instrument and Equipment Repairers
+7510		Coin, Vending, and Amusement Machine Servicers and Repairers
+7540		Locksmiths and Safe Repairers
+7550		Manufactured Building and Mobile Home Installers
+7560		Riggers
+7610		Helpers--Installation, Maintenance, and Repair Workers
+7630		Other Installation, Maintenance, and Repair Workers Including Wind Turbine Service Technicians, and Commercial Divers, and Signal and Track Switch Repairers
+		PRODUCTION
+7700		First-Line Supervisors of Production and Operating Workers
+7710		Aircraft Structure, Surfaces, Rigging, and Systems Assemblers
+7720		Electrical, Electronics, and Electromechanical Assemblers
+7730		Engine and Other Machine Assemblers
+7740		Structural Metal Fabricators and Fitters
+7750		Assemblers and Fabricators, nec
+7800		Bakers
+7810		Butchers and Other Meat, Poultry, and Fish Processing Workers
+7830		Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders
+7840		Food Batchmakers
+7850		Food Cooking Machine Operators and Tenders
+7855		Food Processing, nec
+7900		Computer Control Programmers and Operators
+7920		Extruding and Drawing Machine Setters, Operators, and Tenders, Metal and Plastic
+7930		Forging Machine Setters, Operators, and Tenders, Metal and Plastic
+7940		Rolling Machine Setters, Operators, and Tenders, metal and Plastic
+7950		Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic
+7960		Drilling and Boring Machine Tool Setters, Operators, and Tenders, Metal and Plastic
+8000		Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic
+8010		Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic
+8030		Machinists
+8040		Metal Furnace Operators, Tenders, Pourers, and Casters
+8060		Model Makers and Patternmakers, Metal and Plastic
+8100		Molders and Molding Machine Setters, Operators, and Tenders, Metal and Plastic
+8130		Tool and Die Makers
+8140		Welding, Soldering, and Brazing Workers
+8150		Heat Treating Equipment Setters, Operators, and Tenders, Metal and Plastic
+8200		Plating and Coating Machine Setters, Operators, and Tenders, Metal and Plastic
+8210		Tool Grinders, Filers, and Sharpeners
+8220		Metal workers and plastic workers, nec
+8230		Bookbinders, Printing Machine Operators, and Job Printers
+8250		Prepress Technicians and Workers
+8300		Laundry and Dry-Cleaning Workers
+8310		Pressers, Textile, Garment, and Related Materials
+8320		Sewing Machine Operators
+8330		Shoe and Leather Workers and Repairers
+8340		Shoe Machine Operators and Tenders
+8350		Tailors, Dressmakers, and Sewers
+8400		Textile bleaching and dyeing, and cutting machine setters, operators, and tenders
+8410		Textile Knitting and Weaving Machine Setters, Operators, and Tenders
+8420		Textile Winding, Twisting, and Drawing Out Machine Setters, Operators, and Tenders
+8450		Upholsterers
+8460		Textile, Apparel, and Furnishings workers, nec
+8500		Cabinetmakers and Bench Carpenters
+8510		Furniture Finishers
+8530		Sawing Machine Setters, Operators, and Tenders, Wood
+8540		Woodworking Machine Setters, Operators, and Tenders, Except Sawing
+8550		Woodworkers including model makers and patternmakers, nec
+8600		Power Plant Operators, Distributors, and Dispatchers
+8610		Stationary Engineers and Boiler Operators
+8620		Water Wastewater Treatment Plant and System Operators
+8630		Plant and System Operators, nec
+8640		Chemical Processing Machine Setters, Operators, and Tenders
+8650		Crushing, Grinding, Polishing, Mixing, and Blending Workers
+8710		Cutting Workers
+8720		Extruding, Forming, Pressing, and Compacting Machine Setters, Operators, and Tenders
+8730		Furnace, Kiln, Oven, Drier, and Kettle Operators and Tenders
+8740		Inspectors, Testers, Sorters, Samplers, and Weighers
+8750		Jewelers and Precious Stone and Metal Workers
+8760		Medical, Dental, and Ophthalmic Laboratory Technicians
+8800		Packaging and Filling Machine Operators and Tenders
+8810		Painting Workers and Dyers
+8830		Photographic Process Workers and Processing Machine Operators
+8850		Adhesive Bonding Machine Operators and Tenders
+8860		Cleaning, Washing, and Metal Pickling Equipment Operators and Tenders
+8910		Etchers, Engravers, and Lithographers
+8920		Molders, Shapers, and Casters, Except Metal and Plastic
+8930		Paper Goods Machine Setters, Operators, and Tenders
+8940		Tire Builders
+8950		Helpers--Production Workers
+8965		Other production workers including semiconductor processors and cooling and freezing equipment operators
+		TRANSPORTATION AND MATERIAL MOVING
+9000		Supervisors of Transportation and Material Moving Workers
+9030		Aircraft Pilots and Flight Engineers
+9040		Air Traffic Controllers and Airfield Operations Specialists
+9050		Flight Attendants and Transportation Workers and Attendants
+9100		Bus and Ambulance Drivers and Attendants
+9130		Driver/Sales Workers and Truck Drivers
+9140		Taxi Drivers and Chauffeurs
+9150		Motor Vehicle Operators, All Other
+9200		Locomotive Engineers and Operators
+9230		Railroad Brake, Signal, and Switch Operators
+9240		Railroad Conductors and Yardmasters
+9260		Subway, Streetcar, and Other Rail Transportation Workers
+9300		Sailors and marine oilers, and ship engineers
+9310		Ship and Boat Captains and Operators
+9350		Parking Lot Attendants
+9360		Automotive and Watercraft Service Attendants
+9410		Transportation Inspectors
+9420		Transportation workers, nec
+9510		Crane and Tower Operators
+9520		Dredge, Excavating, and Loading Machine Operators
+9560		Conveyor operators and tenders, and hoist and winch operators
+9600		Industrial Truck and Tractor Operators
+9610		Cleaners of Vehicles and Equipment
+9620		Laborers and Freight, Stock, and Material Movers, Hand
+9630		Machine Feeders and Offbearers
+9640		Packers and Packagers, Hand
+9650		Pumping Station Operators
+9720		Refuse and Recyclable Material Collectors
+9750		Material moving workers, nec
+		MILITARY SPECIFIC
+9800		Military Officer Special and Tactical Operations Leaders
+9810		First-Line Enlisted Military Supervisors
+9820		Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members
+9830		Military, Rank Not Specified
+		UNEMPLOYED OR NEVER WORKED
+9920		Unemployed, with No Work Experience in the Last 5 Years or Earlier or Never Worked
+
+ CLASSWKR		Class of worker [general version]
+0		N/A
+1		Self-employed
+2		Works for wages
+
+ CLASSWKRD		Class of worker [detailed version]
+00		N/A
+10		Self-employed
+11		Employer
+12		Working on own account
+13		Self-employed, not incorporated
+14		Self-employed, incorporated
+20		Works for wages
+21		Works on salary (1920)
+22		Wage/salary, private
+23		Wage/salary at non-profit
+24		Wage/salary, government
+25		Federal govt employee
+26		Armed forces
+27		State govt employee
+28		Local govt employee
+29		Unpaid family worker
+
+ UHRSWORK		Usual hours worked per week
+00		N/A
+01		1
+02		2
+03		3
+04		4
+05		5
+06		6
+07		7
+08		8
+09		9
+10		10
+11		11
+12		12
+13		13
+14		14
+15		15
+16		16
+17		17
+18		18
+19		19
+20		20
+21		21
+22		22
+23		23
+24		24
+25		25
+26		26
+27		27
+28		28
+29		29
+30		30
+31		31
+32		32
+33		33
+34		34
+35		35
+36		36
+37		37
+38		38
+39		39
+40		40
+41		41
+42		42
+43		43
+44		44
+45		45
+46		46
+47		47
+48		48
+49		49
+50		50
+51		51
+52		52
+53		53
+54		54
+55		55
+56		56
+57		57
+58		58
+59		59
+60		60
+61		61
+62		62
+63		63
+64		64
+65		65
+66		66
+67		67
+68		68
+69		69
+70		70
+71		71
+72		72
+73		73
+74		74
+75		75
+76		76
+77		77
+78		78
+79		79
+80		80
+81		81
+82		82
+83		83
+84		84
+85		85
+86		86
+87		87
+88		88
+89		89
+90		90
+91		91
+92		92
+93		93
+94		94
+95		95
+96		96
+97		97
+98		98
+99		99 (Topcode)
+
+ LOOKING		Looking for work
+0		N/A
+1		No, did not look for work
+2		Yes, looked for work
+3		Not reported
+		
+
+ AVAILBLE		Available for work
+0		N/A
+1		No, already has job
+2		No, temporarily ill
+3		No, other reason(s)
+4		Yes, available for work
+5		Not reported
+
+ AGE_HEAD		Age [of head]
+000		Less than 1 year old
+001		1
+002		2
+003		3
+004		4
+005		5
+006		6
+007		7
+008		8
+009		9
+010		10
+011		11
+012		12
+013		13
+014		14
+015		15
+016		16
+017		17
+018		18
+019		19
+020		20
+021		21
+022		22
+023		23
+024		24
+025		25
+026		26
+027		27
+028		28
+029		29
+030		30
+031		31
+032		32
+033		33
+034		34
+035		35
+036		36
+037		37
+038		38
+039		39
+040		40
+041		41
+042		42
+043		43
+044		44
+045		45
+046		46
+047		47
+048		48
+049		49
+050		50
+051		51
+052		52
+053		53
+054		54
+055		55
+056		56
+057		57
+058		58
+059		59
+060		60
+061		61
+062		62
+063		63
+064		64
+065		65
+066		66
+067		67
+068		68
+069		69
+070		70
+071		71
+072		72
+073		73
+074		74
+075		75
+076		76
+077		77
+078		78
+079		79
+080		80
+081		81
+082		82
+083		83
+084		84
+085		85
+086		86
+087		87
+088		88
+089		89
+090		90 (90+ in 1980 and 1990)
+091		91
+092		92
+093		93
+094		94
+095		95
+096		96
+097		97
+098		98
+099		99
+100		100 (100+ in 1960-1970)
+101		101
+102		102
+103		103
+104		104
+105		105
+106		106
+107		107
+108		108
+109		109
+110		110
+111		111
+112		112 (112+ in the 1980 internal data)
+113		113
+114		114
+115		115 (115+ in the 1990 internal data)
+116		116
+117		117
+118		118
+119		119
+120		120
+121		121
+122		122
+123		123
+124		124
+125		125
+126		126
+129		129
+130		130
+135		135

@@ -15,9 +15,11 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
+drop if year == 2013
 gen youth = (age <= 25 & age >= 16)
 gen disadvantaged_youth = (youth & (poverty <= 125))
 gen unemployed = (empstat == 2)
+gen unemployedyouth = youth & unemployed
 
 egen youth_in_hh = max(youth), by(serial)
 egen unemployed_in_hh = max(unemployed), by(serial)
@@ -33,6 +35,8 @@ egen unemployed_state = total(perwt * unemployed), by(statefip)
 egen unemployed_puma = total(perwt * unemployed), by(statefip puma)
 
 gen unemployed_percentage = unemployed_puma / unemployed_state
+
+egen unemployed_youth_state = total(perwt * unemployedyouth), by(statefip)
 
 *sum youth_puma if statefip == 06 & puma == 3703 
 *5797 youth in lancaster
@@ -55,8 +59,9 @@ gen state_money = 1000 * .02 + 1000 * youth_percentage_state + 1000 * unemployed
 egen npumas = nvals(puma), by(statefip)
 
 gen puma_money = (state_money/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
-gen numjobs = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
+gen numjobspuma = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
 //alternatively, could be doled out as 48 weeks of $15/hr pay 15 hrs a week
+gen numjobsstate = state_money / .0105
 
 
 *figure out households w/ youth in them
@@ -68,14 +73,27 @@ tab youthinpov if pernum == 1 [fweight = perwt]
 
 gen job_money = 0
 replace job_money = 10500 if youthinpov & pernum == 1
-gen newincome = inctot+job_money
+gen newincome = ftotinc+job_money
 
-sgini newincome if pernum == 1 [fweight=hhwt]
-sgini inctot if pernum == 1 [fweight=hhwt]
+sgini newincome if pernum == 1 & newincome < 9999999 [fweight=hhwt]
+sgini ftotinc if pernum == 1 & newincome < 9999999 [fweight=hhwt]
+
+gen povline = 11670 + (numprec-1)*4060
 
 /* collapse (mean) state_money, by(statefip)
-
 . export delimited using "/Users/braddv/Desktop/BERNIE/state_money.csv",
 how to collapse without losing data? or i guess just use file again. 
 */
+//tab occ2010 if statefip==06 & youth [fweight=perwt] (california young jobs distribution)
+//
+/*collapse (mean) youth_state, by(statefip)
+export delimited using "/Users/braddv/Desktop/BERNIE/youth_state.csv"*/
+/*collapse (mean) disadvantaged_state, by(statefip)
+export delimited using "/Users/braddv/Desktop/BERNIE/disadvantaged_state.csv"*/
+/*collapse (mean) unemployed_state, by(statefip)
+export delimited using "/Users/braddv/Desktop/BERNIE/unemployed_state.csv"*/
+/*collapse (mean) unemployed_youth_state, by(statefip)
+export delimited using "/Users/braddv/Desktop/BERNIE/unemployed_youth_state.csv"*/
+/*collapse (mean) numjobsstate, by(statefip)
+export delimited using "/Users/braddv/Desktop/BERNIE/numjobs_state.csv"*/
 
