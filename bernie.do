@@ -16,8 +16,10 @@
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
 drop if year == 2013
+
 gen youth = (age <= 25 & age >= 16)
-gen disadvantaged_youth = (youth & (poverty <= 125))
+gen disadvantaged = (poverty <= 100)
+gen disadvantaged_youth = (youth & disadvantaged)
 gen unemployed = (empstat == 2)
 gen unemployedyouth = youth & unemployed
 
@@ -73,12 +75,14 @@ tab youthinpov if pernum == 1 [fweight = perwt]
 
 gen job_money = 0
 replace job_money = 10500 if youthinpov & pernum == 1
-gen newincome = ftotinc+job_money
+gen newincome = inctot+job_money if inctot < 9999999
+replace newincome = ftotinc+job_money if ftotinc < 9999999
 
 sgini newincome if pernum == 1 & newincome < 9999999 [fweight=hhwt]
-sgini ftotinc if pernum == 1 & newincome < 9999999 [fweight=hhwt]
+sgini ftotinc if pernum == 1 & ftotinc < 9999999 [fweight=hhwt]
 
 gen povline = 11670 + (numprec-1)*4060
+gen outofpov = poverty & (newincome > povline) & (newincome < 9999999)
 
 /* collapse (mean) state_money, by(statefip)
 . export delimited using "/Users/braddv/Desktop/BERNIE/state_money.csv",
