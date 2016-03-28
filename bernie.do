@@ -75,14 +75,20 @@ tab youthinpov if pernum == 1 [fweight = perwt]
 
 gen job_money = 0
 replace job_money = 10500 if youthinpov & pernum == 1
-gen newincome = inctot+job_money if inctot < 9999999
-replace newincome = ftotinc+job_money if ftotinc < 9999999
 
-sgini newincome if pernum == 1 & newincome < 9999999 [fweight=hhwt]
-sgini ftotinc if pernum == 1 & ftotinc < 9999999 [fweight=hhwt]
+gen familyincome = inctot 
+replace familyincome = ftotinc if ftotinc < 9999999 
+replace familyincome = 0 if familyincome < 0
+
+gen newincome = familyincome+job_money
 
 gen povline = 11670 + (numprec-1)*4060
-gen outofpov = poverty & (newincome > povline) & (newincome < 9999999)
+gen outofpov = disadvantaged & (newincome > povline) & (newincome < 9999999)
+
+egen outofpovfam = max(outofpov), by(serial)
+
+sgini newincome if pernum == 1 & familyincome < 9999999 [fweight=hhwt]
+sgini familyincome if pernum == 1 & familyincome < 9999999 [fweight=hhwt]
 
 /* collapse (mean) state_money, by(statefip)
 . export delimited using "/Users/braddv/Desktop/BERNIE/state_money.csv",
@@ -101,3 +107,4 @@ export delimited using "/Users/braddv/Desktop/BERNIE/unemployed_youth_state.csv"
 /*collapse (mean) numjobsstate, by(statefip)
 export delimited using "/Users/braddv/Desktop/BERNIE/numjobs_state.csv"*/
 
+//tab job_money if pernum == 1 [fweight = hhwt]
