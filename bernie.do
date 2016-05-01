@@ -90,6 +90,34 @@ egen outofpovfam = max(outofpov), by(serial)
 sgini newincome if pernum == 1 & familyincome < 9999999 [fweight=hhwt]
 sgini familyincome if pernum == 1 & familyincome < 9999999 [fweight=hhwt]
 
+gen povgap = povline - familyincome if familyincome < povline
+gen newpovgap = povline - newincome if newincome < povline
+
+egen totalhh = sum(hhwt) if pernum == 1
+egen p0 = sum(hhwt) if poverty < 100 & pernum == 1
+
+egen p1 = sum((povgap*hhwt)/povline)
+disp p1/totalhh //.22842
+egen newp1 = sum((newpovgap*hhwt)/povline)
+disp newp1/totalhh //.19363
+
+egen p2 = sum((povgap/povline)^2*hhwt)
+egen newp2 = sum((newpovgap/povline)^2*hhwt)
+
+disp p2/totalhh //.1659
+disp newp2/totalhh //.1356
+
+disp p0[23]/totalhh //.19710145
+
+egen newp0 = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1))
+disp newp0[23]/totalhh //.1978997
+
+egen totalhhstate = sum(hhwt) if pernum == 1, by(statefip)
+egen p0state = sum(hhwt) if poverty < 100 & pernum == 1, by(statefip)
+egen newp0 = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)
+
+
+
 /* collapse (mean) state_money, by(statefip)
 . export delimited using "/Users/braddv/Desktop/BERNIE/state_money.csv",
 how to collapse without losing data? or i guess just use file again. 
