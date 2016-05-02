@@ -87,7 +87,7 @@ replace newhhwt = jobsleft if duplicate == 1
 replace newhhwt = hhwt-jobsleft if duplicate == 0
 
 gen job_money = 0 
-replace job_money = 10500 if (youthinpov & pernum == 1) & ((jobsleft > 0 & duplicate == 1) | duplicate == 0)
+replace job_money = 10500 if (runningwt < numjobspuma) | (jobsleft > 0 & duplicate == 1)
 
 gen familyincome = inctot 
 replace familyincome = ftotinc if ftotinc < 9999999 
@@ -100,24 +100,24 @@ gen outofpov = disadvantaged & (newincome > povline) & (newincome < 9999999)
 
 egen outofpovfam = max(outofpov), by(serial)
 
-sgini newincome if pernum == 1 & familyincome < 9999999 [fweight=hhwt]
-sgini familyincome if pernum == 1 & familyincome < 9999999 [fweight=hhwt]
+sgini newincome if pernum == 1 & familyincome < 9999999 [fweight=newhhwt]
+sgini familyincome if pernum == 1 & familyincome < 9999999 [fweight=newhhwt]
 
 gen povgap = povline - familyincome if familyincome < povline
 gen newpovgap = povline - newincome if newincome < povline
 
-egen totalhh = sum(hhwt) if pernum == 1
-egen p0 = sum(hhwt) if poverty < 100 & pernum == 1
+egen totalhh = sum(newhhwt) if pernum == 1
+egen p0 = sum(newhhwt) if poverty < 100 & pernum == 1
 
-egen p1 = sum((povgap*hhwt)/povline)
+egen p1 = sum((povgap*newhhwt)/povline)
 disp p1/totalhh 
 //.22842
-egen newp1 = sum((newpovgap*hhwt)/povline)
+egen newp1 = sum((newpovgap*newhhwt)/povline)
 disp newp1/totalhh 
 //.19363
 
-egen p2 = sum((povgap/povline)^2*hhwt)
-egen newp2 = sum((newpovgap/povline)^2*hhwt)
+egen p2 = sum((povgap/povline)^2*newhhwt)
+egen newp2 = sum((newpovgap/povline)^2*newhhwt)
 
 disp p2/totalhh 
 //.1659
@@ -127,13 +127,13 @@ disp newp2/totalhh
 disp p0[23]/totalhh 
 //.19710145
 
-egen newp0 = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1))
+egen newp0 = sum(newhhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1))
 disp newp0[23]/totalhh 
 //.1978997
 
-egen totalhhstate = sum(hhwt) if pernum == 1, by(statefip)
-egen p0state = sum(hhwt) if poverty < 100 & pernum == 1, by(statefip)
-egen newp0state = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)
+egen totalhhstate = sum(newhhwt) if pernum == 1, by(statefip)
+egen p0state = sum(newhhwt) if poverty < 100 & pernum == 1, by(statefip)
+egen newp0state = sum(newhhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)
 
 
 /*. keep if youthinpov
