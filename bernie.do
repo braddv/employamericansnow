@@ -72,13 +72,22 @@ egen householdwithyouth = max(youth), by(serial)
 gen youthinpov = (householdwithyouth & (poverty <= 100) & pernum == 1)
 tab youthinpov if pernum == 1 [fweight = perwt]
 *162 jobs for 5287 households
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta"
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if youthinpov
 bysort statefip puma: gen runningwt = sum(hhwt)
 keep serial pernum runningwt
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
+gen jobsleft = 0 
+gen prevwt = 0
+replace prevwt = runningwt - hhwt if runningwt > numjobspuma 
+replace jobsleft = numjobspuma - prevwt if (prevwt < numjobspuma & prevwt > 0)
+gen newhhwt = hhwt
+expand 2 if jobsleft > 0, generate(duplicate)
+replace newhhwt = jobsleft if duplicate == 1
+replace newhhwt = hhwt-jobsleft if duplicate == 0
+
 gen job_money = 0 
-replace job_money = 10500 if youthinpov & pernum == 1 & runningwt < numjobspuma
+replace job_money = 10500 if (youthinpov & pernum == 1) & ((jobsleft > 0 & duplicate == 1) | duplicate == 0)
 
 gen familyincome = inctot 
 replace familyincome = ftotinc if ftotinc < 9999999 
