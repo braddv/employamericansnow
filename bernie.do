@@ -69,12 +69,16 @@ gen numjobsstate = state_money / .0105
 *figure out households w/ youth in them
 egen householdwithyouth = max(youth), by(serial)
 *youth hh's living in poverty
-gen youthinpov = (householdwithyouth & (poverty <= 100))
+gen youthinpov = (householdwithyouth & (poverty <= 100) & pernum == 1)
 tab youthinpov if pernum == 1 [fweight = perwt]
 *162 jobs for 5287 households
-
-gen job_money = 0
-replace job_money = 10500 if youthinpov & pernum == 1
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta"
+keep if youthinpov
+bysort statefip puma: gen runningwt = sum(hhwt)
+keep serial pernum runningwt
+joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
+gen job_money = 0 
+replace job_money = 10500 if youthinpov & pernum == 1 & runningwt < numjobspuma
 
 gen familyincome = inctot 
 replace familyincome = ftotinc if ftotinc < 9999999 
@@ -97,26 +101,41 @@ egen totalhh = sum(hhwt) if pernum == 1
 egen p0 = sum(hhwt) if poverty < 100 & pernum == 1
 
 egen p1 = sum((povgap*hhwt)/povline)
-disp p1/totalhh //.22842
+disp p1/totalhh 
+//.22842
 egen newp1 = sum((newpovgap*hhwt)/povline)
-disp newp1/totalhh //.19363
+disp newp1/totalhh 
+//.19363
 
 egen p2 = sum((povgap/povline)^2*hhwt)
 egen newp2 = sum((newpovgap/povline)^2*hhwt)
 
-disp p2/totalhh //.1659
-disp newp2/totalhh //.1356
+disp p2/totalhh 
+//.1659
+disp newp2/totalhh 
+//.1356
 
-disp p0[23]/totalhh //.19710145
+disp p0[23]/totalhh 
+//.19710145
 
 egen newp0 = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1))
-disp newp0[23]/totalhh //.1978997
+disp newp0[23]/totalhh 
+//.1978997
 
 egen totalhhstate = sum(hhwt) if pernum == 1, by(statefip)
 egen p0state = sum(hhwt) if poverty < 100 & pernum == 1, by(statefip)
-egen newp0 = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)
+egen newp0state = sum(hhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)
 
 
+/*. keep if youthinpov
+(2,915,463 observations deleted)
+
+. bysort statefip puma: gen runningwt = sum(hhwt)
+
+. keep serial pernum runningwt
+
+. joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie4-11.dta", unmatched(both)
+*/
 
 /* collapse (mean) state_money, by(statefip)
 . export delimited using "/Users/braddv/Desktop/BERNIE/state_money.csv",
