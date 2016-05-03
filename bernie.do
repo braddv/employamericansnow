@@ -15,7 +15,10 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08.dta", clear
+
 drop if year == 2013
+drop if gq == 4 | gq == 3
 
 gen youth = (age <= 25 & age >= 16)
 gen disadvantaged = (poverty <= 100)
@@ -26,6 +29,12 @@ gen unemployedyouth = youth & unemployed
 egen youth_in_hh = max(youth), by(serial)
 egen unemployed_in_hh = max(unemployed), by(serial)
 egen disadvantaged_hh = max(disadvantaged_youth), by(serial)
+
+egen youth_in_fam = max(youth), by(serial famunit)
+egen unemployed_in_fam = max(unemployed), by(serial famunit)
+egen disadvantaged_fam = max(disadvantaged_youth), by(serial famunit)
+egen unemployedyouth_fam = max(youth & unemployed), by(serial famunit)
+
 
 egen youth_state = total(perwt * youth), by(statefip) 
 egen youth_puma = total(perwt * youth), by(statefip puma) 
@@ -65,86 +74,95 @@ gen numjobspuma = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*
 //alternatively, could be doled out as 48 weeks of $15/hr pay 15 hrs a week
 gen numjobsstate = state_money / .0105
 
+*gen numjobspumamin = puma_money / state_minwage
+*gen numjobsstatemin = state_money / state_minwage
 
 *figure out households w/ youth in them
 egen householdwithyouth = max(youth), by(serial)
 *youth hh's living in poverty
 gen youthinpov = (householdwithyouth & (poverty <= 100) & pernum == 1)
-tab youthinpov if pernum == 1 [fweight = perwt]
-*162 jobs for 5287 households
+
+egen familyheadnum = min(pernum), by(serial famunit)
+gen familyhead = (familyheadnum == pernum) 
+gen familyheadyouthunemployed = familyhead*unemployedyouth_fam
+gen familyheadyouthdisadvantaged = familyhead*disadvantaged_fam
+
+
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", replace
+
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", clear
 gen runningwt = 0
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
-keep if youthinpov
-bysort statefip puma: replace runningwt = sum(hhwt)
+keep if familyheadyouthdisadvantaged
+bysort statefip puma: replace runningwt = sum(perwt)
 keep serial pernum runningwt
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
 gen jobsleft = 0 
 gen prevwt = 0
-replace prevwt = runningwt - hhwt if runningwt > numjobspuma 
+replace prevwt = runningwt - perwt if runningwt > numjobspuma 
 replace jobsleft = numjobspuma - prevwt if (prevwt < numjobspuma & prevwt > 0)
 gen newhhwt = hhwt
+gen newperwt = perwt
 egen maxrunningwt = max(runningwt), by(statefip puma)
 
 expand 2 if jobsleft > 0 & maxrunningwt > numjobspuma, generate(duplicate)
-replace newhhwt = jobsleft if duplicate == 1
-replace newhhwt = hhwt-jobsleft if duplicate == 0
-
-
+replace newperwt = int(jobsleft) if duplicate == 1
+replace newperwt = max(int(perwt-jobsleft),0) if duplicate == 0
 
 gen job_money = 0 
-replace job_money = 10500 if (runningwt < numjobspuma) | (jobsleft > 0 & duplicate == 1) & pernum == 1
-
-replace job_money = 10500 * (numjobspuma / maxrunningwt) if (maxrunningwt < numjobspuma & pernum == 1)
+replace job_money = 10500 if ((runningwt < numjobspuma) | (duplicate == 1))
+replace job_money = 10500 * (numjobspuma / maxrunningwt) if (maxrunningwt < numjobspuma)
 
 gen numjobsafter = numjobspuma
 replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma 
 
-gen familyincome = inctot 
-replace familyincome = ftotinc if ftotinc < 9999999 
-replace familyincome = 0 if familyincome < 0
+gen familyincome = ftotinc
 
 gen newincome = familyincome+job_money
 
-gen povline = 11670 + (numprec-1)*4060
-gen outofpov = disadvantaged & (newincome > povline) & (newincome < 9999999)
+gen povline = 11670 + (famsize-1)*4060
+gen outofpov = (ftotinc <= povline) & (newincome > povline) & (newincome < 9999999)
 
-egen outofpovfam = max(outofpov), by(serial)
+egen outofpovfam = max(outofpov), by(serial famunit)
 
-sgini newincome if pernum == 1 & familyincome < 9999999 [fweight=int(newhhwt)]
-sgini familyincome if pernum == 1 & familyincome < 9999999 [fweight=int(newhhwt)]
+sgini newincome if familyhead == 1 & familyincome < 9999999 [fweight=newperwt]
+sgini familyincome if familyhead == 1 & familyincome < 9999999 [fweight=newperwt]
 
 gen povgap = povline - familyincome if familyincome < povline
 gen newpovgap = povline - newincome if newincome < povline
 
-egen totalhh = sum(newhhwt) if pernum == 1
-egen p0 = sum(newhhwt) if poverty < 100 & pernum == 1
+gen poor = familyincome < povline
+gen newpoor = newincome < povline
 
-egen p1 = sum((povgap*newhhwt)/povline)
-disp p1/totalhh 
-//.22842
-egen newp1 = sum((newpovgap*newhhwt)/povline)
-disp newp1/totalhh 
-//.19363
+tab poor [fweight=newperwt]
+tab newpoor [fweight=newperwt]
 
-egen p2 = sum((povgap/povline)^2*newhhwt)
-egen newp2 = sum((newpovgap/povline)^2*newhhwt)
+egen moneyspent = sum(job_money*newperwt) if familyhead 
 
-disp p2/totalhh 
-//.1659
-disp newp2/totalhh 
-//.1356
+tabulate job_money if familyhead [fweight=newperwt]
 
-disp p0[23]/totalhh 
-//.19710145
+/*egen totalfam = sum(newperwt) if familyhead == 1
+egen p0 = sum(newperwt) if poor
 
-egen newp0 = sum(newhhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1))
-disp newp0[23]/totalhh 
-//.1978997
+egen p1 = sum((povgap*newperwt)/povline)
+disp p1/totalfam
+egen newp1 = sum((newpovgap*newperwt)/povline)
+disp newp1/totalfam 
 
-egen totalhhstate = sum(newhhwt) if pernum == 1, by(statefip)
-egen p0state = sum(newhhwt) if poverty < 100 & pernum == 1, by(statefip)
-egen newp0state = sum(newhhwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)
+egen p2 = sum((povgap/povline)^2*newperwt)
+egen newp2 = sum((newpovgap/povline)^2*newperwt)
 
+disp p2/totalfam 
+disp newp2/totalfam 
+
+disp p0[23]/totalfam 
+
+egen newp0 = sum(newperwt) if newpoor
+disp newp0[23]/totalfam 
+
+egen totalhhstate = sum(newperwt) if pernum == 1, by(statefip)
+egen p0state = sum(newperwt) if poverty < 100 & pernum == 1, by(statefip)
+egen newp0state = sum(newperwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)*/
 
 /*. keep if youthinpov
 (2,915,463 observations deleted)
