@@ -1,4 +1,3 @@
-* the world is crumbling. solutions are being introduced. they wont pass without radical political change
 * 1 billion divided equally between states
 * 1 billion distributed on the basis of relative 16-25 y/o compared to total in all states
 * 1 billion on relative unemployed compared to toal in all states
@@ -22,18 +21,19 @@ drop if gq == 4 | gq == 3
 
 gen youth = (age <= 25 & age >= 16)
 gen disadvantaged = (poverty <= 100)
-gen disadvantaged_youth = (youth & disadvantaged)
 gen unemployed = (empstat == 2)
-gen unemployedyouth = youth & unemployed
+gen unemployed_youth = youth * unemployed
+gen disadvantaged_youth = youth * disadvantaged
 
 egen youth_in_hh = max(youth), by(serial)
 egen unemployed_in_hh = max(unemployed), by(serial)
-egen disadvantaged_hh = max(disadvantaged_youth), by(serial)
+egen disadvantaged_hh = max(disadvantaged), by(serial)
 
 egen youth_in_fam = max(youth), by(serial famunit)
 egen unemployed_in_fam = max(unemployed), by(serial famunit)
-egen disadvantaged_fam = max(disadvantaged_youth), by(serial famunit)
-egen unemployedyouth_fam = max(youth & unemployed), by(serial famunit)
+egen disadvantaged_fam = max(disadvantaged), by(serial famunit)
+gen disadvantagedyouth_fam = disadvantaged_fam*youth_in_fam 
+gen unemployedyouth_fam = youth_in_fam*unemployed_youth
 
 
 egen youth_state = total(perwt * youth), by(statefip) 
@@ -85,7 +85,7 @@ gen youthinpov = (householdwithyouth & (poverty <= 100) & pernum == 1)
 egen familyheadnum = min(pernum), by(serial famunit)
 gen familyhead = (familyheadnum == pernum) 
 gen familyheadyouthunemployed = familyhead*unemployedyouth_fam
-gen familyheadyouthdisadvantaged = familyhead*disadvantaged_fam
+gen familyheadyouthdisadvantaged = familyhead*disadvantagedyouth_fam
 
 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", replace
@@ -94,7 +94,7 @@ use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", clear
 gen runningwt = 0
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if familyheadyouthdisadvantaged
-bysort statefip puma serial famunit: replace runningwt = sum(perwt)
+bysort statefip puma: replace runningwt = sum(perwt)
 keep serial pernum runningwt
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
 gen jobsleft = 0 
