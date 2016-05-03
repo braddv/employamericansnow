@@ -161,19 +161,11 @@ disp p1/totalfam
 egen newp1 = sum((newpovgap*newperwt)/povline) if familyhead == 1
 disp newp1/totalfam 
 
-egen p2 = sum((povgap/povline)^2*newperwt)
-egen newp2 = sum((newpovgap/povline)^2*newperwt)
+egen p2 = sum((povgap/povline)^2*newperwt) if familyhead == 1
+egen newp2 = sum((newpovgap/povline)^2*newperwt) if familyhead == 1
 
-disp p2/totalfam 
-disp newp2/totalfam 
-
-disp p0[23]/totalfam 
-
-disp newp0[23]/totalfam 
-
-egen totalhhstate = sum(newperwt) if pernum == 1, by(statefip)
-egen p0state = sum(newperwt) if poverty < 100 & pernum == 1, by(statefip)
-egen newp0state = sum(newperwt) if ((poverty < 100 & pernum == 1) & !(outofpov == 1 & pernum == 1)), by(statefip)*/
+disp p2[7]/totalfam[7] 
+disp newp2[7]/totalfam[7]
 
 /*. keep if youthinpov
 (2,915,463 observations deleted)
