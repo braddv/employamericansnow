@@ -18,9 +18,12 @@ use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08.dta", clear
 
 drop if year == 2013
 drop if gq == 4 | gq == 3
+drop if statefip == 36 & puma == 3309
+drop if statefip == 25 & puma == 1300
 
 gen youth = (age <= 25 & age >= 16)
-gen disadvantaged = (poverty <= 100)
+gen povline = 11670 + (famsize-1)*4060
+gen disadvantaged = (ftotinc < povline)
 gen unemployed = (empstat == 2)
 gen unemployed_youth = youth * unemployed
 gen disadvantaged_youth = youth * disadvantaged
@@ -92,29 +95,35 @@ save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", replac
 
 use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", clear
 gen runningwt = 0
+gen prevwt = 0 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if familyheadyouthdisadvantaged
+bysort statefip puma: gen pumaid = _n
 bysort statefip puma: replace runningwt = sum(perwt)
-keep serial pernum runningwt
+replace prevwt = runningwt - perwt if runningwt > numjobspuma
+gen jobsleft = numjobspuma - prevwt
+replace jobsleft = 0 if jobsleft < 0
+replace jobsleft = 0 if runningwt < jobsleft
+gen jobrecipient = 0
+replace jobrecipient = 1 if runningwt < numjobspuma | jobsleft > 0
+keep serial pernum jobrecipient jobsleft
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
-gen jobsleft = 0 
-gen prevwt = 0
-replace prevwt = runningwt - perwt if runningwt > numjobspuma 
-replace jobsleft = numjobspuma - prevwt if (prevwt < numjobspuma & prevwt > 0)
-gen newhhwt = hhwt
+
+replace jobrecipient = 0 if missing(jobrecipient)
+replace jobsleft = 0 if missing(jobsleft)
+
 gen newperwt = perwt
 egen maxrunningwt = max(runningwt), by(statefip puma)
 
-expand 2 if jobsleft > 0 & maxrunningwt > numjobspuma, generate(duplicate)
+expand 2 if jobsleft > 0, generate(duplicate)
 replace newperwt = int(jobsleft) if duplicate == 1
-replace newperwt = max(int(perwt-jobsleft),0) if duplicate == 0
+replace newperwt = max(int(perwt-jobsleft),0) if duplicate == 0 & jobsleft > 0
+replace jobrecipient = 0 if duplicate == 0 & jobsleft > 0
 
-gen jobrecipient = 0
-replace jobrecipient = 1 if ((runningwt < numjobspuma) | duplicate == 1)
+egen jobsreceived = sum(jobrecipient*newperwt)
 
 gen job_money = 0 
-replace job_money = 10500 if ((runningwt < numjobspuma) | (duplicate == 1))
-replace job_money = 10500 * (numjobspuma / maxrunningwt) if (maxrunningwt < numjobspuma & familyheadyouthdisadvantaged)
+replace job_money = 10500 if jobrecipient
 
 gen numjobsafter = numjobspuma
 replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma 
@@ -123,13 +132,12 @@ gen familyincome = ftotinc
 
 gen newincome = familyincome+job_money
 
-gen povline = 11670 + (famsize-1)*4060
 gen outofpov = (ftotinc <= povline) & (newincome > povline) & (newincome < 9999999)
 
 egen outofpovfam = max(outofpov), by(serial famunit)
 
-sgini newincome if familyhead == 1 & familyincome < 9999999 [fweight=newperwt]
-sgini familyincome if familyhead == 1 & familyincome < 9999999 [fweight=newperwt]
+*sgini newincome if familyhead == 1 & familyincome < 9999999 [fweight=newperwt]
+*sgini familyincome if familyhead == 1 & familyincome < 9999999 [fweight=newperwt]
 
 gen povgap = povline - familyincome if familyincome < povline
 gen newpovgap = povline - newincome if newincome < povline
@@ -144,12 +152,13 @@ egen moneyspent = sum(job_money*newperwt) if familyhead
 
 tabulate job_money if familyhead [fweight=newperwt]
 
-/*egen totalfam = sum(newperwt) if familyhead == 1
-egen p0 = sum(newperwt) if poor
+egen totalfam = sum(newperwt) if familyhead == 1
+egen p0 = sum(newperwt) if poor & familyhead == 1
+egen newp0 = sum(newperwt) if newpoor & familyhead == 1
 
-egen p1 = sum((povgap*newperwt)/povline)
+egen p1 = sum((povgap*newperwt)/povline) if familyhead == 1
 disp p1/totalfam
-egen newp1 = sum((newpovgap*newperwt)/povline)
+egen newp1 = sum((newpovgap*newperwt)/povline) if familyhead == 1
 disp newp1/totalfam 
 
 egen p2 = sum((povgap/povline)^2*newperwt)
@@ -160,7 +169,6 @@ disp newp2/totalfam
 
 disp p0[23]/totalfam 
 
-egen newp0 = sum(newperwt) if newpoor
 disp newp0[23]/totalfam 
 
 egen totalhhstate = sum(newperwt) if pernum == 1, by(statefip)
