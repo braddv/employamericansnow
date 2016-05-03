@@ -94,7 +94,7 @@ use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", clear
 gen runningwt = 0
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if familyheadyouthdisadvantaged
-bysort statefip puma: replace runningwt = sum(perwt)
+bysort statefip puma serial famunit: replace runningwt = sum(perwt)
 keep serial pernum runningwt
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
 gen jobsleft = 0 
@@ -109,9 +109,12 @@ expand 2 if jobsleft > 0 & maxrunningwt > numjobspuma, generate(duplicate)
 replace newperwt = int(jobsleft) if duplicate == 1
 replace newperwt = max(int(perwt-jobsleft),0) if duplicate == 0
 
+gen jobrecipient = 0
+replace jobrecipient = 1 if ((runningwt < numjobspuma) | duplicate == 1)
+
 gen job_money = 0 
 replace job_money = 10500 if ((runningwt < numjobspuma) | (duplicate == 1))
-replace job_money = 10500 * (numjobspuma / maxrunningwt) if (maxrunningwt < numjobspuma)
+replace job_money = 10500 * (numjobspuma / maxrunningwt) if (maxrunningwt < numjobspuma & familyheadyouthdisadvantaged)
 
 gen numjobsafter = numjobspuma
 replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma 
