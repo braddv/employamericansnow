@@ -14,7 +14,7 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie09.dta", clear
 
 drop if year == 2013
 drop if gq == 4 | gq == 3
@@ -25,7 +25,9 @@ gen youth = (age <= 25 & age >= 16)
 gen povline = 11670 + (famsize-1)*4060
 gen disadvantaged = (ftotinc < povline)
 gen unemployed = (empstat == 2)
+gen notemployed = (empstat != 1)
 gen unemployed_youth = youth * unemployed
+gen notemployed_youth = youth * notemployed
 gen disadvantaged_youth = youth * disadvantaged
 
 egen youth_in_hh = max(youth), by(serial)
@@ -37,6 +39,7 @@ egen unemployed_in_fam = max(unemployed), by(serial famunit)
 egen disadvantaged_fam = max(disadvantaged), by(serial famunit)
 gen disadvantagedyouth_fam = disadvantaged_fam*youth_in_fam 
 gen unemployedyouth_fam = youth_in_fam*unemployed_youth
+gen notemployedyouth_fam = youth_in_fam*notemployed_youth
 
 
 egen youth_state = total(perwt * youth), by(statefip) 
@@ -87,19 +90,36 @@ gen youthinpov = (householdwithyouth & (poverty <= 100) & pernum == 1)
 
 egen familyheadnum = min(pernum), by(serial famunit)
 gen familyhead = (familyheadnum == pernum) 
+gen familyheadyouth = familyhead*youth_in_fam
 gen familyheadyouthunemployed = familyhead*unemployedyouth_fam
+gen familyheadyouthnotemployed = familyhead*notemployedyouth_fam
 gen familyheadyouthdisadvantaged = familyhead*disadvantagedyouth_fam
 
+histogram ftotinc if ftotinc > 0 & ftotinc < 250000 & familyheadyouth [fweight=perwt], width(5000) 
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", replace
+egen finccut = cut(ftotinc), at(0,5000,10000,25000,50000,100000,250000,2000000) icodes
 
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie08-egen.dta", clear
+gen employed = empstat == 1
+
+probit employed educ famsize finccut sex if youth [fweight=perwt]
+predict employedp
+gen modelemployed = employedp > .5
+gen correctmodel = modelemployed == employed
+tab correctmodel if youth [fweight=perwt]
+
+egen youthempprob = max(employedp) if youth, by(serial famunit)
+egen headmaxyouthempp = max(youthempprob), by(serial famunit) 
+gen invheadmaxyouthempp = 1-headmaxyouthempp if !missing(headmaxyouthempp)
+
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie09-egen.dta", replace
+
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie09-egen.dta", clear
 gen runningwt = 0
 gen prevwt = 0 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
-keep if familyheadyouthdisadvantaged
+keep if familyheadyouthnotemployed
 bysort statefip puma: gen pumaid = _n
-bysort statefip puma: replace runningwt = sum(perwt)
+bysort statefip puma (headmaxyouthempp): replace runningwt = sum(perwt)
 replace prevwt = runningwt - perwt if runningwt > numjobspuma
 gen jobsleft = numjobspuma - prevwt
 replace jobsleft = 0 if jobsleft < 0
@@ -148,7 +168,8 @@ gen newpoor = newincome < povline
 tab poor [fweight=newperwt]
 tab newpoor [fweight=newperwt]
 
-egen moneyspent = sum(job_money*newperwt) if familyhead 
+egen moneyspent = sum(job_money*newperwt) if jobrecipient
+disp moneyspent[1]
 
 tabulate job_money if familyhead [fweight=newperwt]
 
