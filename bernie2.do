@@ -1,5 +1,5 @@
 
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie09-egen.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie10-egen.dta", clear
 gen runningwt = 0
 gen prevwt = 0 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace

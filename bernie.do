@@ -109,6 +109,6 @@ egen youthempprob = max(employedp) if youth, by(serial famunit)
 egen headmaxyouthempp = max(youthempprob), by(serial famunit) 
 gen invheadmaxyouthempp = 1-headmaxyouthempp if !missing(headmaxyouthempp)
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie09-egen.dta", replace
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie10-egen.dta", replace
 
 
