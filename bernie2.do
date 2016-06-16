@@ -6,7 +6,7 @@ save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if familyheadyouthdisadvantaged
 bysort statefip puma: gen pumaid = _n
 bysort statefip puma (headmaxyouthempp): replace runningwt = sum(perwt)
-//use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want max or min likelihood
+//use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want min or max likelihood
 replace prevwt = runningwt - perwt if runningwt > numjobspuma
 gen jobsleft = numjobspuma - prevwt
 replace jobsleft = 0 if jobsleft < 0
