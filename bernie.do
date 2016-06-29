@@ -77,6 +77,35 @@ egen npumas = nvals(puma), by(statefip)
 gen puma_money = (state_money/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
 gen puma_money2 = (state_money2/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
 
+gen minwage = 7.25
+replace minwage = 8.75 if statefip == 02
+replace minwage = 8.05 if statefip == 04
+replace minwage = 7.5 if statefip == 05
+replace minwage = 9 if statefip == 06
+replace minwage = 8.14 if statefip == 08
+replace minwage = 9.15 if statefip == 09
+replace minwage = 8.25 if statefip == 10
+replace minwage = 10.5 if statefip == 11
+replace minwage = 8.05 if statefip == 12
+replace minwage = 8.25 if statefip == 17
+replace minwage = 7.5 if statefip == 23
+replace minwage = 8.25 if statefip == 26
+replace minwage = 9 if statefip == 25
+replace minwage = 7.65 if statefip == 29
+replace minwage = 8.05 if statefip == 30
+replace minwage = 8 if statefil == 31
+replace minwage = 8.25 if statefip == 32
+replace minwage = 8.38 if statefip == 34
+replace minwage = 7.5 if statefip == 35
+replace minwage = 8.75 if statefip == 36
+replace minwage = 8.15 if statefip == 39
+replace minwage = 9.25 if statefip == 41
+replace minwage = 9 if statefip == 44
+replace minwage = 8.5 if statefip == 46
+replace minwage = 9.15 if statefip == 50
+replace minwage = 9.47 if statefip == 53
+replace minwage = 8 if statefip == 54
+
 gen numjobspuma = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
 gen numjobspuma2 = puma_money2 / .0105
 //alternatively, could be doled out as 48 weeks of $15/hr pay 15 hrs a week
