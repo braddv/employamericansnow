@@ -5,14 +5,14 @@ gen prevwt = 0
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if familyheadydandnotemp
 bysort statefip puma: gen pumaid = _n
-bysort statefip puma (headmaxyouthempp): replace runningwt = sum(perwt)
+bysort statefip puma (invheadmaxyouthempp): replace runningwt = sum(perwt)
 //use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want min or max likelihood
-replace prevwt = runningwt - perwt if runningwt > numjobspuma
-gen jobsleft = numjobspuma - prevwt
+replace prevwt = runningwt - perwt if runningwt > numjobspuma2
+gen jobsleft = numjobspuma2 - prevwt
 replace jobsleft = 0 if jobsleft < 0
 replace jobsleft = 0 if runningwt < jobsleft
 gen jobrecipient = 0
-replace jobrecipient = 1 if runningwt < numjobspuma | jobsleft > 0
+replace jobrecipient = 1 if runningwt < numjobspuma2 | jobsleft > 0
 keep serial pernum jobrecipient jobsleft
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
 
@@ -32,8 +32,8 @@ egen jobsreceived = sum(jobrecipient*newperwt)
 gen job_money = 0 
 replace job_money = 10500 if jobrecipient
 
-gen numjobsafter = numjobspuma
-replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma 
+gen numjobsafter = numjobspuma2
+replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma2
 
 gen familyincome = ftotinc
 
