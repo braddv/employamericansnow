@@ -70,13 +70,18 @@ gen unemployed_percentage_state = unemployed_state/unemployed_total
 gen disadvantaged_percentage_state = disadvantaged_state/disadvantaged_total
 
 gen state_money = 1000 * .02 + 1000 * youth_percentage_state + 1000 * unemployed_percentage_state + 1000 * disadvantaged_percentage_state 
+gen state_money2 = 1333 * youth_percentage_state + 1333 * unemployed_percentage_state + 1333 * disadvantaged_percentage_state 
 
 egen npumas = nvals(puma), by(statefip)
 
 gen puma_money = (state_money/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
+gen puma_money2 = (state_money2/3) * (youth_percentage + unemployed_percentage + disadvantaged_percentage)
+
 gen numjobspuma = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
+gen numjobspuma2 = puma_money2 / .0105
 //alternatively, could be doled out as 48 weeks of $15/hr pay 15 hrs a week
 gen numjobsstate = state_money / .0105
+gen numjobsstate2 = state_money2 / .0105
 
 *gen numjobspumamin = puma_money / state_minwage
 *gen numjobsstatemin = state_money / state_minwage
@@ -92,6 +97,7 @@ gen familyheadyouth = familyhead*youth_in_fam
 gen familyheadyouthunemployed = familyhead*unemployedyouth_fam
 gen familyheadyouthnotemployed = familyhead*notemployedyouth_fam
 gen familyheadyouthdisadvantaged = familyhead*disadvantagedyouth_fam
+gen familyheadydandnotemp = familyheadyouthnotemployed*familyheadyouthdisadvantaged
 
 egen finccut = cut(ftotinc), at(0,5000,10000,25000,50000,100000,250000,2000000) icodes
 

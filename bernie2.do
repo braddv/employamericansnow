@@ -3,7 +3,7 @@ use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie13-egen.dta", clear
 gen runningwt = 0
 gen prevwt = 0 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
-keep if familyheadyouthdisadvantaged
+keep if familyheadydandnotemp
 bysort statefip puma: gen pumaid = _n
 bysort statefip puma (headmaxyouthempp): replace runningwt = sum(perwt)
 //use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want min or max likelihood
