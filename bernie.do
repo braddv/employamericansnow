@@ -93,7 +93,7 @@ replace minwage = 8.25 if statefip == 26
 replace minwage = 9 if statefip == 25
 replace minwage = 7.65 if statefip == 29
 replace minwage = 8.05 if statefip == 30
-replace minwage = 8 if statefil == 31
+replace minwage = 8 if statefip == 31
 replace minwage = 8.25 if statefip == 32
 replace minwage = 8.38 if statefip == 34
 replace minwage = 7.5 if statefip == 35
@@ -106,11 +106,13 @@ replace minwage = 9.15 if statefip == 50
 replace minwage = 9.47 if statefip == 53
 replace minwage = 8 if statefip == 54
 
-gen numjobspuma = puma_money / .0105 //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
-gen numjobspuma2 = puma_money2 / .0105
+gen millionperyr = minwage * .001 //assuming work 1000 hrs per yr
+
+gen numjobspuma = puma_money / millionperyr //.0105 is a 10,500 dollar per yr job ($15*30hrs*12weeks in summer and $15*10hrs*34weeks in schoolyr)
+gen numjobspuma2 = puma_money2 / millionperyr
 //alternatively, could be doled out as 48 weeks of $15/hr pay 15 hrs a week
-gen numjobsstate = state_money / .0105
-gen numjobsstate2 = state_money2 / .0105
+gen numjobsstate = state_money / millionperyr
+gen numjobsstate2 = state_money2 / millionperyr
 
 *gen numjobspumamin = puma_money / state_minwage
 *gen numjobsstatemin = state_money / state_minwage
