@@ -1,5 +1,5 @@
 
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie13-egen.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14-egen.dta", clear
 gen runningwt = 0
 gen prevwt = 0 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
@@ -7,12 +7,12 @@ keep if familyheadydandnotemp
 bysort statefip puma: gen pumaid = _n
 bysort statefip puma (invheadmaxyouthempp): replace runningwt = sum(perwt)
 //use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want min or max likelihood
-replace prevwt = runningwt - perwt if runningwt > numjobspuma2
-gen jobsleft = numjobspuma2 - prevwt
+replace prevwt = runningwt - perwt if runningwt > numjobspuma
+gen jobsleft = numjobspuma - prevwt
 replace jobsleft = 0 if jobsleft < 0
 replace jobsleft = 0 if runningwt < jobsleft
 gen jobrecipient = 0
-replace jobrecipient = 1 if runningwt < numjobspuma2 | jobsleft > 0
+replace jobrecipient = 1 if runningwt < numjobspuma | jobsleft > 0
 keep serial pernum jobrecipient jobsleft
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
 
@@ -30,10 +30,10 @@ replace jobrecipient = 0 if duplicate == 0 & jobsleft > 0
 egen jobsreceived = sum(jobrecipient*newperwt)
 
 gen job_money = 0 
-replace job_money = 10500 if jobrecipient
+replace job_money = minwage*1000 if jobrecipient
 
-gen numjobsafter = numjobspuma2
-replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma2
+gen numjobsafter = numjobspuma
+replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma
 
 gen familyincome = ftotinc
 
@@ -75,7 +75,15 @@ egen newp2 = sum((newpovgap/povline)^2*newperwt) if familyhead == 1
 disp p2[7]/totalfam[7] 
 disp newp2[7]/totalfam[7]
 
-bysort sex: tab jobrecipient [fweight=newperwt]
+gen bigregion = 0 
+replace bigregion = 1 if region >= 10 & region <= 20
+replace bigregion = 2 if region >= 20 & region <= 30
+replace bigregion = 3 if region >= 30 & region <= 40
+replace bigregion = 4 if region >= 40 & region <= 50
+
+
+
+/*bysort sex: tab jobrecipient [fweight=newperwt]
 bysort racesing: tab jobrecipient [fweight=newperwt]
 bysort finccut: tab jobrecipient [fweight=newperwt]
-bysort educ: tab jobrecipient [fweight=newperwt]
+bysort educ: tab jobrecipient [fweight=newperwt]*/

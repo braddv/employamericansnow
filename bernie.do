@@ -14,7 +14,7 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie13.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14.dta", clear
 
 drop if year == 2013
 drop if gq == 4 | gq == 3
@@ -36,8 +36,8 @@ egen youth_in_fam = max(youth), by(serial famunit)
 egen unemployed_in_fam = max(unemployed), by(serial famunit)
 egen disadvantaged_fam = max(disadvantaged), by(serial famunit)
 gen disadvantagedyouth_fam = disadvantaged_fam*youth_in_fam 
-gen unemployedyouth_fam = youth_in_fam*unemployed_youth
-gen notemployedyouth_fam = youth_in_fam*notemployed_youth
+egen unemployedyouth_fam = max(unemployed_youth), by(serial famunit)
+egen notemployedyouth_fam = max(notemployed_youth), by(serial famunit)
 
 
 egen youth_state = total(perwt * youth), by(statefip) 
@@ -146,6 +146,6 @@ egen youthempprob = max(employedp) if youth, by(serial famunit)
 egen headmaxyouthempp = max(youthempprob), by(serial famunit) 
 gen invheadmaxyouthempp = 1-headmaxyouthempp if !missing(headmaxyouthempp)
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie13-egen.dta", replace
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14-egen.dta", replace
 
 
