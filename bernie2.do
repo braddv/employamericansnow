@@ -82,6 +82,29 @@ replace bigregion = 3 if region >= 30 & region <= 40
 replace bigregion = 4 if region >= 40 & region <= 50
 
 gen hs = educ >= 6
+//RACE
+egen p1race = sum((povgap*newperwt)/povline) if familyhead == 1, by(racesing)
+egen newp1race = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(racesing)
+egen totalfamrace = sum(newperwt) if familyhead == 1, by(racesing)
+
+egen p2race = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(racesing)
+egen newp2race = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(racesing)
+//REGION
+egen p1region = sum((povgap*newperwt)/povline) if familyhead == 1, by(bigregion)
+egen newp1region = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(bigregion)
+egen totalfamregion = sum(newperwt) if familyhead == 1, by(bigregion)
+
+egen p2region = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(bigregion)
+egen newp2region = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(bigregion)
+//INCOME
+egen p1income = sum((povgap*newperwt)/povline) if familyhead == 1, by(finccut)
+egen newp1income = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(finccut)
+egen totalfamincome = sum(newperwt) if familyhead == 1, by(finccut)
+
+egen p2income = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(finccut)
+egen newp2income = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(finccut)
+
+
 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14-finalD.dta", replace
 
