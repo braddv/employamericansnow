@@ -105,6 +105,40 @@ egen p2income = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(finccut)
 egen newp2income = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(finccut)
 
 
+gen povgaprace = p1race/totalfamrace
+gen newpovgaprace = newp1race/totalfamrace
+gen povincrace = p2race/totalfamrace
+gen newpovincrace = newp2race/totalfamrace
+
+gen povgapincome = p1income/totalfamincome
+gen newpovgapincome = newp1income/totalfamincome
+gen povincincome = p2income/totalfamincome
+gen newpovincincome = newp2income/totalfamincome
+
+gen povgapregion = p1region/totalfamregion
+gen newpovgapregion = newp1region/totalfamregion
+gen povincregion = p2region/totalfamregion
+gen newpovincregion = newp2region/totalfamregion
+
+//EDUC
+gen neweduc = 0 if educ == 0
+replace neweduc = 1 if educ > 0 & educ <= 2
+replace neweduc = 2 if educ > 2 & educ <= 6
+replace neweduc = 3 if educ > 6
+
+egen p1educ = sum((povgap*newperwt)/povline) if familyhead == 1, by(neweduc)
+egen newp1educ = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(neweduc)
+egen totalfameduc = sum(newperwt) if familyhead == 1, by(neweduc)
+
+egen p2educ = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(neweduc)
+egen newp2educ = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(neweduc)
+
+gen povgapeduc = p1educ/totalfameduc
+gen newpovgapeduc = newp1educ/totalfameduc
+gen povinceduc = p2educ/totalfameduc
+gen newpovinceduc = newp2educ/totalfameduc
+
+gen rural = (metro == 0 | metro == 1)
 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14-finalD.dta", replace
 

@@ -35,7 +35,7 @@ egen disadvantaged_hh = max(disadvantaged), by(serial)
 egen youth_in_fam = max(youth), by(serial famunit)
 egen unemployed_in_fam = max(unemployed), by(serial famunit)
 egen disadvantaged_fam = max(disadvantaged), by(serial famunit)
-gen disadvantagedyouth_fam = disadvantaged_fam*youth_in_fam 
+egen disadvantagedyouth_fam = max(disadvantaged_youth), by(serial famunit) 
 egen unemployedyouth_fam = max(unemployed_youth), by(serial famunit)
 egen notemployedyouth_fam = max(notemployed_youth), by(serial famunit)
 
