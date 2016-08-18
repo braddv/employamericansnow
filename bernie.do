@@ -14,7 +14,7 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16.dta", clear
 
 drop if year == 2013
 drop if gq == 4 | gq == 3
@@ -134,9 +134,27 @@ egen finccut = cut(ftotinc), at(0,5000,10000,25000,50000,100000,250000,2000000) 
 
 histogram finccut if familyheadyouth [fweight=perwt], discrete
 
+gen hisp = hispan != 0
+
+gen single = marst != 1
+
 gen employed = empstat == 1
 
-probit employed i.educ i.famsize i.finccut i.sex i.racesing i.metro i.statefip if youth [fweight=perwt]
+gen inschool = gradeatt > 0
+
+gen racef = 1 if racesing == 1 & hisp == 0
+replace racef = 2 if racesing == 2 & hisp == 0
+replace racef = 3 if hisp
+replace racef = 4 if racesing > 2 & hisp == 0
+
+gen coleduc = 0 if educ <= 5
+replace coleduc = 1 if educ == 6 
+replace coleduc = 2 if educ > 6 & educ < 9
+replace coleduc = 3 if educ >= 9
+
+gen rural = (metro == 0 | metro == 1)
+
+probit employed i.coleduc i.single i.racef i.finccut i.sex i.rural i.statefip i.inschool if youth [fweight=perwt]
 predict employedp
 gen modelemployed = employedp > .5
 gen correctmodel = modelemployed == employed
@@ -146,6 +164,6 @@ egen youthempprob = max(employedp) if youth, by(serial famunit)
 egen headmaxyouthempp = max(youthempprob), by(serial famunit) 
 gen invheadmaxyouthempp = 1-headmaxyouthempp if !missing(headmaxyouthempp)
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie14-egen.dta", replace
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-egen.dta", replace
 
 
