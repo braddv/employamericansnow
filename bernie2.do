@@ -5,14 +5,14 @@ gen prevwt = 0
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
 keep if familyheadydandnotemp
 bysort statefip puma: gen pumaid = _n
-bysort statefip puma (invheadmaxyouthempp): replace runningwt = sum(perwt)
+bysort statefip puma (headmaxyouthempp): replace runningwt = sum(perwt)
 //use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want min or max likelihood
-replace prevwt = runningwt - perwt if runningwt > numjobspuma
-gen jobsleft = numjobspuma - prevwt
+replace prevwt = runningwt - perwt if runningwt > numjobspuma2
+gen jobsleft = numjobspuma2 - prevwt
 replace jobsleft = 0 if jobsleft < 0
 replace jobsleft = 0 if runningwt < jobsleft
 gen jobrecipient = 0
-replace jobrecipient = 1 if runningwt < numjobspuma | jobsleft > 0
+replace jobrecipient = 1 if runningwt < numjobspuma2 | jobsleft > 0
 keep serial pernum jobrecipient jobsleft
 joinby serial pernum using "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", unmatched(both)
 
@@ -32,8 +32,8 @@ egen jobsreceived = sum(jobrecipient*newperwt)
 gen job_money = 0 
 replace job_money = minwage*1000 if jobrecipient
 
-gen numjobsafter = numjobspuma
-replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma
+gen numjobsafter = numjobspuma2
+replace numjobsafter = maxrunningwt if maxrunningwt < numjobspuma2
 
 gen familyincome = ftotinc
 
@@ -83,12 +83,12 @@ replace bigregion = 4 if region >= 40 & region <= 50
 
 gen hs = educ >= 6
 //RACE
-egen p1race = sum((povgap*newperwt)/povline) if familyhead == 1, by(racesing)
-egen newp1race = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(racesing)
-egen totalfamrace = sum(newperwt) if familyhead == 1, by(racesing)
+egen p1race = sum((povgap*newperwt)/povline) if familyhead == 1, by(racef)
+egen newp1race = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(racef)
+egen totalfamrace = sum(newperwt) if familyhead == 1, by(racef)
 
-egen p2race = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(racesing)
-egen newp2race = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(racesing)
+egen p2race = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(racef)
+egen newp2race = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(racef)
 //REGION
 egen p1region = sum((povgap*newperwt)/povline) if familyhead == 1, by(bigregion)
 egen newp1region = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(bigregion)
@@ -130,19 +130,17 @@ gen hseduc = 0 if educ <= 5
 replace hseduc = 1 if educ == 6 
 replace hseduc = 2 if educ > 6
 
+egen p1educ = sum((povgap*newperwt)/povline) if familyhead == 1, by(coleduc)
+egen newp1educ = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(coleduc)
+egen totalfameduc = sum(newperwt) if familyhead == 1, by(coleduc)
 
-egen p1educ = sum((povgap*newperwt)/povline) if familyhead == 1, by(neweduc)
-egen newp1educ = sum((newpovgap*newperwt)/povline) if familyhead == 1, by(neweduc)
-egen totalfameduc = sum(newperwt) if familyhead == 1, by(neweduc)
-
-egen p2educ = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(neweduc)
-egen newp2educ = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(neweduc)
+egen p2educ = sum((povgap/povline)^2*newperwt) if familyhead == 1, by(coleduc)
+egen newp2educ = sum((newpovgap/povline)^2*newperwt) if familyhead == 1, by(coleduc)
 
 gen povgapeduc = p1educ/totalfameduc
 gen newpovgapeduc = newp1educ/totalfameduc
 gen povinceduc = p2educ/totalfameduc
 gen newpovinceduc = newp2educ/totalfameduc
-
 
 gen marhh = marst == 1
 
@@ -150,14 +148,16 @@ gen newempstat = empstat
 replace newempstat = 1 if empstat != 1 & jobrecipient 
 
 //RACE YD GAP
-egen p1raceyd = sum((povgap*newperwt)/povline) if familyheadydandnotemp == 1, by(racesing)
-egen newp1raceyd = sum((newpovgap*newperwt)/povline) if familyheadydandnotemp == 1, by(racesing)
-egen totalfamraceyd = sum(newperwt) if familyheadydandnotemp == 1, by(racesing)
+egen p1raceyd = sum((povgap*newperwt)/povline) if familyheadydandnotemp == 1, by(racef)
+egen newp1raceyd = sum((newpovgap*newperwt)/povline) if familyheadydandnotemp == 1, by(racef)
+egen totalfamraceyd = sum(newperwt) if familyheadydandnotemp == 1, by(racef)
 
 gen povgapraceyd = p1raceyd/totalfamraceyd
 gen newpovgapraceyd = newp1raceyd/totalfamraceyd
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-finalA.dta", replace
+egen newfinccut = cut(newincome), at(0,5000,10000,25000,50000,100000,250000,2000000) icodes
+
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-finalD.dta", replace
 
 /*bysort sex: tab jobrecipient [fweight=newperwt]
 bysort racesing: tab jobrecipient [fweight=newperwt]
