@@ -1,11 +1,11 @@
 
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-egen.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-egen2.dta", clear
 gen runningwt = 0
 gen prevwt = 0 
 save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie5-1.dta", replace
-keep if familyheadydandnotemp
+keep if disadvantaged & youth 
 bysort statefip puma: gen pumaid = _n
-bysort statefip puma (headmaxyouthempp): replace runningwt = sum(perwt)
+bysort statefip puma (youthempprob): replace runningwt = sum(perwt)
 //use (headmaxyouthempp) or (invheadmaxyouthempp) above depending if you want min or max likelihood
 replace prevwt = runningwt - perwt if runningwt > numjobspuma2
 gen jobsleft = numjobspuma2 - prevwt
@@ -148,16 +148,29 @@ gen newempstat = empstat
 replace newempstat = 1 if empstat != 1 & jobrecipient 
 
 //RACE YD GAP
-egen p1raceyd = sum((povgap*newperwt)/povline) if familyheadydandnotemp == 1, by(racef)
-egen newp1raceyd = sum((newpovgap*newperwt)/povline) if familyheadydandnotemp == 1, by(racef)
-egen totalfamraceyd = sum(newperwt) if familyheadydandnotemp == 1, by(racef)
+egen p1raceyd = sum((povgap*newperwt)/povline) if youth & disadvantaged, by(racef)
+egen newp1raceyd = sum((newpovgap*newperwt)/povline) if youth & disadvantaged, by(racef)
+egen totalfamraceyd = sum(newperwt) if youth & disadvantaged, by(racef)
 
 gen povgapraceyd = p1raceyd/totalfamraceyd
 gen newpovgapraceyd = newp1raceyd/totalfamraceyd
 
+bysort racef: tab povgapraceyd
+bysort racef: tab newpovgapraceyd
+
+egen p1educyd = sum((povgap/povline)*newperwt) if youth & disadvantaged, by(coleduc)
+egen newp1educyd = sum((newpovgap*newperwt)/povline) if youth & disadvantaged, by(coleduc)
+egen totalfameducyd = sum(newperwt) if youth & diadvantaged, by(coleduc)
+
+gen povgapeducyd = p1educyd/totalfameducyd
+gen newpovgapeducyd = newp1educyd/totalfameducyd
+
+bysort coleduc: tab povgapeducyd
+bysort coleduc: tab newpovgapeducyd
+
 egen newfinccut = cut(newincome), at(0,5000,10000,25000,50000,100000,250000,2000000) icodes
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-finalD.dta", replace
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-finalD2.dta", replace
 
 /*bysort sex: tab jobrecipient [fweight=newperwt]
 bysort racesing: tab jobrecipient [fweight=newperwt]

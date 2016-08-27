@@ -14,7 +14,7 @@
 *then by puma w/in state 
 *
 *tabulate age if statefip == 06 & puma == 3703 [fweight=perwt]
-use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16.dta", clear
+use "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie17.dta", clear
 
 drop if year == 2013
 drop if gq == 4 | gq == 3
@@ -163,7 +163,8 @@ tab correctmodel if youth [fweight=perwt]
 egen youthempprob = max(employedp) if youth, by(serial famunit)
 egen headmaxyouthempp = max(youthempprob), by(serial famunit) 
 gen invheadmaxyouthempp = 1-headmaxyouthempp if !missing(headmaxyouthempp)
+gen invyouthempprob = 1-youthempprob if !missing(youthempprob)
 
-save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie16-egen.dta", replace
+save "/Users/braddv/Desktop/BERNIE/employamericansnow/bernie17egen.dta", replace
 
 
